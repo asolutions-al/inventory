@@ -82,7 +82,7 @@ export default async function TransactionsPage({
                 {DATE_TABS.map((tab) => (
                   <Link
                     key={tab}
-                    href={`/${shopId}/transaction?tab=${tab}`}
+                    href={`/${shopId}/transaction/list?tab=${tab}`}
                     passHref
                   >
                     <TabsTrigger value={tab}>{t(tab)}</TabsTrigger>

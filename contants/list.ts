@@ -47,7 +47,7 @@ export const SIDEBAR_ITEMS: {
   {
     icon: ReceiptText,
     label: "Transaction",
-    href: "/transaction",
+    href: "/transaction/list",
   },
 ]
 

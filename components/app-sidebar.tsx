@@ -70,7 +70,7 @@ export function AppSidebar({
           },
           {
             title: t("Transactions"),
-            url: `/${shopId}/transaction`,
+            url: `/${shopId}/transaction/list`,
           },
         ],
       },
