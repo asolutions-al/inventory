@@ -32,7 +32,8 @@ const columns: ColumnDef<SelectProduct>[] = [
     header: ({ column }) => <SortBtn text="Name" column={column} />,
     cell: ({ row }) => {
       const data = row.original
-      const imageSrc = data.productImages?.[0]?.url
+      // const imageSrc = data.productImages?.[0]?.url
+      const imageSrc = ""
       return (
         <div className="flex items-center gap-4">
           <Avatar>

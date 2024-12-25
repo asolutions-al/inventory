@@ -9,14 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
-import {
   Form,
   FormControl,
   FormField,
@@ -36,7 +28,7 @@ import {
 } from "@/db/(inv)/schema"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { CheckIcon, Eraser, PlusIcon, Trash, Upload } from "lucide-react"
+import { CheckIcon, Eraser, PlusIcon, Upload } from "lucide-react"
 import Image from "next/image"
 import { useForm } from "react-hook-form"
 
@@ -56,10 +48,8 @@ import { useRouter } from "next/navigation"
 import { PostgresError } from "postgres"
 import { useState } from "react"
 import { toast } from "sonner"
-import { Combobox } from "../combobox"
 import { ConfirmDialog } from "../dialog"
 import { FormHeader } from "../form-header"
-import { GradientPicker } from "../ui/gradient-picker"
 
 type Types = {
   performAction: (
@@ -97,10 +87,10 @@ export function ProductForm({
       commission: defaultValues?.commission || 0,
       status: defaultValues?.status || "ACTIVE",
       description: defaultValues?.description || "",
-      ...(defaultValues?.categoryId && {
-        // TODO: whats going on here?
-        categoryId: defaultValues.categoryId,
-      }),
+      // ...(defaultValues?.categoryId && {
+      //   // TODO: whats going on here?
+      //   categoryId: defaultValues.categoryId,
+      // }),
     },
   })
 
@@ -343,7 +333,7 @@ export function ProductForm({
                     </CardHeader>
                     <CardContent>
                       <div className="grid gap-6 sm:grid-cols-3">
-                        <div className="grid gap-3 col-span-2">
+                        {/* <div className="grid gap-3 col-span-2">
                           <FormField
                             control={form.control}
                             name="categoryId"
@@ -388,7 +378,7 @@ export function ProductForm({
                               </FormItem>
                             )}
                           />
-                        </div>
+                        </div> */}
                         <div className="flex items-end justify-end">
                           <Button
                             variant="outline"
@@ -464,7 +454,8 @@ export function ProductForm({
                           height="300"
                           src={
                             imageUrls[0] ||
-                            defaultValues?.productImages[0]?.url ||
+                            // defaultValues?.productImages[0]?.url ||
+                            "" ||
                             "/placeholder.svg"
                           }
                           width="300"
@@ -512,7 +503,7 @@ export function ProductForm({
           </main>
         </form>
       </Form>
-      <Dialog open={showCategoryDialog} onOpenChange={setShowCategoryDialog}>
+      {/* <Dialog open={showCategoryDialog} onOpenChange={setShowCategoryDialog}>
         <DialogContent>
           <Form {...categoryForm}>
             <form
@@ -565,7 +556,7 @@ export function ProductForm({
             </form>
           </Form>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
       {deleteCategoryDialog.open && (
         <ConfirmDialog
           onOpenChange={(open) =>

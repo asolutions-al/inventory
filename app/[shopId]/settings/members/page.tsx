@@ -37,10 +37,11 @@ async function MembersPage({ searchParams }: Args) {
   const data = await db.query.member.findMany({
     where: eq(member.shopId, shopId),
     with: {
-      user: true,
+      user_userId: true,
       shop: true,
     },
   })
+  console.log("data", data)
 
   const shareUrl = `${appUrl}/invitation/${invitationParam}`
 
@@ -74,6 +75,8 @@ async function MembersPage({ searchParams }: Args) {
           </DialogTrigger>
         </div>
         <div className="mt-6">
+          {/* @ts-ignore */}
+
           <DataTable data={data} columns={memberColumns} />
           <DialogContent>
             <DialogHeader>
@@ -93,6 +96,7 @@ async function MembersPage({ searchParams }: Args) {
                       fromShopId: shopId,
                       fromUserId: userId,
                       role: values.role,
+                      updatedBy: userId,
                     })
                     .returning({
                       id: invitation.id,

@@ -6,7 +6,7 @@ import {
   SelectProductType,
   SelectTransactionType,
 } from "@/db/(inv)/schema"
-import { categories, movement, products, transaction } from "@/orm/(inv)/schema"
+import { category, movement, product, transaction } from "@/orm/(inv)/schema"
 import { getFromHeaders } from "@/utils"
 import { eq, sql } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
@@ -16,14 +16,15 @@ export const createProduct = async (values: InsertProductFormType) => {
   const { userId, shopId } = getFromHeaders()
 
   const [res] = await db
-    .insert(products)
+    .insert(product)
     .values({
       ...values,
       shopId,
-      userId,
+      // userId,
+      updatedBy: userId,
     })
     .returning({
-      id: products.id,
+      id: product.id,
     })
 
   revalidatePath("/[lang]/[shopId]/products")
@@ -33,7 +34,7 @@ export const createProduct = async (values: InsertProductFormType) => {
 export const createCategory = async (values: InsertCategoryFormType) => {
   "use server"
   const { shopId } = getFromHeaders()
-  await db.insert(categories).values({
+  await db.insert(category).values({
     ...values,
     shopId,
   })
@@ -42,7 +43,7 @@ export const createCategory = async (values: InsertCategoryFormType) => {
 
 export const deleteCategory = async (id: string) => {
   "use server"
-  await db.delete(categories).where(eq(categories.id, id))
+  await db.delete(category).where(eq(category.id, id))
   revalidatePath("/[lang]/[shopId]/products/create")
 }
 
@@ -68,7 +69,8 @@ export const createTransaction = async (
         shopId,
         type,
         amount,
-        userId,
+        // userId,
+        updatedBy: userId,
         date: rest.date.toISOString(),
       })
       .returning({
@@ -79,25 +81,28 @@ export const createTransaction = async (
       movements.map((m) => {
         const product = productsList.find((p) => p.id === m.productId)! // since it was selected, it must exist
         return {
-          ...m,
+          // ...m,
+          // userId,
           transactionId: resTrans.id,
           type,
           shopId,
-          userId,
+          updatedBy: userId,
           productDetails: product,
+          amount: m.amount,
+          productId: m.productId,
         }
       })
     )
     movements.forEach(async (m) => {
       // TODO: takes too long, find a way to optimize
       await tx
-        .update(products)
+        .update(product)
         .set({
-          currentStock: sql`${products.currentStock} + ${
+          currentStock: sql`${product.currentStock} + ${
             m.amount * (type === "IN" ? 1 : -1)
           }`,
         })
-        .where(eq(products.id, m.productId))
+        .where(eq(product.id, m.productId))
     })
   })
 }

@@ -58,7 +58,8 @@ const schema = insertTransactionFormSchema.extend({
     insertMovementFormSchema.omit({
       transactionId: true,
       type: true,
-      userId: true,
+      // userId: true,
+      updatedBy: true,
       shopId: true,
       productDetails: true,
     })

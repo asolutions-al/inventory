@@ -3,7 +3,7 @@ import { RoleWrapper } from "@/components/wrappers"
 import { db } from "@/db/(inv)/instance"
 import { createCategory, deleteCategory, getCategories } from "@/lib/supabase"
 import { uploadProductImages } from "@/lib/supabase/edge-actions"
-import { products } from "@/orm/(inv)/schema"
+import { product } from "@/orm/(inv)/schema"
 import { getFromHeaders } from "@/utils/general"
 import { eq } from "drizzle-orm"
 import { getTranslations } from "next-intl/server"
@@ -18,9 +18,9 @@ type Args = {
 async function UpdateProductPage({ params }: Args) {
   const t = await getTranslations()
   const { id } = params
-  const data = await db.query.products.findFirst({
-    where: eq(products.id, id),
-    with: { productImages: true },
+  const data = await db.query.product.findFirst({
+    where: eq(product.id, id),
+    // with: { productImages: true },
   })
   const categoriesList = await getCategories()
 
@@ -33,15 +33,16 @@ async function UpdateProductPage({ params }: Args) {
           try {
             const { userId, shopId } = getFromHeaders()
             const [res] = await db
-              .update(products)
+              .update(product)
               .set({
                 ...values,
                 shopId,
-                userId,
+                // userId,
+                updatedBy: userId,
               })
-              .where(eq(products.id, id))
+              .where(eq(product.id, id))
               .returning({
-                id: products.id,
+                id: product.id,
               })
 
             if (formData) await uploadProductImages({ id: res.id, formData })
@@ -51,6 +52,7 @@ async function UpdateProductPage({ params }: Args) {
             console.error(error)
           }
         }}
+        // @ts-ignore
         defaultValues={data}
         categoriesList={categoriesList}
         createNewCategory={createCategory}

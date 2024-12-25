@@ -25,8 +25,8 @@ export async function InvitationCard({
           {t("Join")} "{data.shop.name}"
         </CardTitle>
         <h2 className="text-lg">
-          {data.user.email} {t("invited you to join as a", { role: data.role })}
-          .
+          {data.user_fromUserId.email}{" "}
+          {t("invited you to join as a", { role: data.role })}.
         </h2>
         <CardDescription>
           *

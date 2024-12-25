@@ -15,11 +15,12 @@ async function CreatePartyPage() {
         onSubmit={async (values) => {
           "use server"
           try {
-            const { shopId } = getFromHeaders()
+            const { shopId, userId } = getFromHeaders()
 
             await db.insert(party).values({
               ...values,
               shopId,
+              updatedBy: userId,
             })
 
             redirect(`/${shopId}/party/list`)

@@ -10,7 +10,7 @@ export const SubscriptionWrapper = async ({
 }) => {
   const res = await getSubscription()
 
-  if (res?.plan !== required) return null
+  // if (res?.plan !== required) return null
 
   return <>{children}</>
 }

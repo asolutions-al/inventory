@@ -59,6 +59,7 @@ export async function GET(request: Request) {
         await tx.insert(schUser).values({
           id: userId, // use same id as auth user
           email: user.email!, // TODO: are we sure email is always present?
+          updatedBy: userId,
         })
       }
 
@@ -99,7 +100,7 @@ export async function GET(request: Request) {
           .values({
             name: "My First Shop",
             description: "This is my first shop",
-            userId,
+            updatedBy: userId,
           })
           .returning({
             id: shop.id,
@@ -115,6 +116,7 @@ export async function GET(request: Request) {
         userId,
         shopId,
         role,
+        updatedBy: userId,
       })
     })
   } catch (error) {

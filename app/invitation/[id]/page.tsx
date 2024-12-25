@@ -19,7 +19,8 @@ export default async function InvitationIdPage({
     where: eq(invitation.id, id),
     with: {
       shop: true,
-      user: true,
+      // user: true,
+      user_fromUserId: true,
     },
   })
 

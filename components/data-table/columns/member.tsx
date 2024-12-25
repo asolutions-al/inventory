@@ -30,7 +30,7 @@ const columns: ColumnDef<SelectMemberTypeWithShopUser>[] = [
     },
   },
   {
-    accessorKey: "user.email",
+    accessorKey: "user_userId.email",
     header: ({ column }) => <SortBtn text="User email" column={column} />,
   },
   {

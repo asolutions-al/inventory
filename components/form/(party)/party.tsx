@@ -31,7 +31,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Messages } from "@/global"
-import { partyType, status } from "@/orm/(inv)/schema"
+import { party_type, status } from "@/orm/(inv)/schema"
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 
@@ -110,7 +110,7 @@ function PartyForm({ defaultValues, onSubmit, title }: Props) {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {partyType.enumValues.map((item) => (
+                            {party_type.enumValues.map((item) => (
                               <SelectItem key={item} value={item}>
                                 {t(item)}
                               </SelectItem>

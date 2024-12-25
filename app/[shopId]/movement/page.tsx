@@ -41,7 +41,7 @@ export default async function MovementPage({
     lte(movement.createdAt, end.toISOString()),
   ]
 
-  if (role !== "ADMIN") qry.push(eq(movement.userId, userId))
+  if (role !== "ADMIN") qry.push(eq(movement.updatedBy, userId))
 
   const data = await db.query.movement.findMany({
     where: and(...qry),
@@ -77,6 +77,7 @@ export default async function MovementPage({
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {/* @ts-ignore */}
             <DataTable columns={movementUserColumns} data={data} />
           </CardContent>
         </Card>

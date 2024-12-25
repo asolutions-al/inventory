@@ -4,8 +4,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "drizzle:introspect": "drizzle-kit introspect",
-    "drizzle.auth:introspect": "drizzle-kit introspect --config drizzle.config.auth.ts",
+    "drizzle.introspect": "drizzle-kit introspect",
+    "drizzle.introspect:auth": "drizzle-kit introspect --config drizzle.config.auth.ts",
     "fmt": "prettier --write .",
     "tsc": "tsc --noEmit"
   },

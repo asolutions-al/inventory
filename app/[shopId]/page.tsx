@@ -34,7 +34,7 @@ export default async function ShopDashboardPage({
     lte(movement.createdAt, end.toISOString()),
   ]
 
-  if (role !== "ADMIN") qry.push(eq(movement.userId, userId))
+  if (role !== "ADMIN") qry.push(eq(movement.updatedBy, userId))
 
   const movements = await db.query.movement.findMany({
     where: and(...qry),
@@ -54,6 +54,7 @@ export default async function ShopDashboardPage({
       if (curr.type === "IN") existing.in += curr.amount
       if (curr.type === "OUT") {
         existing.out += curr.amount
+        // @ts-ignore
         existing.commission += curr.productDetails.commission * curr.amount
       }
 
@@ -64,6 +65,8 @@ export default async function ShopDashboardPage({
       in: curr.type === "IN" ? curr.amount : 0,
       out: curr.type === "OUT" ? curr.amount : 0,
       commission:
+        // @ts-ignore
+
         curr.type === "OUT" ? curr.productDetails.commission * curr.amount : 0,
     })
     return acc
@@ -72,13 +75,16 @@ export default async function ShopDashboardPage({
   const fiveMostSoldProducts = outMovements
     .filter((movement) => movement.transaction.reason === "SALE")
     .reduce<FiveMostSoldProductsChartProps["data"]>((acc, curr) => {
+      // @ts-ignore
       const existing = acc.find((data) => data.id === curr.productDetails.id)
       if (existing) {
         existing.quantity += curr.amount
         return acc
       }
       acc.push({
+        // @ts-ignore
         id: curr.productDetails.id,
+        // @ts-ignore
         label: curr.productDetails.name,
         quantity: curr.amount,
       })

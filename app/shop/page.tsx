@@ -45,7 +45,7 @@ export default async function ShopPage() {
                 </DialogDescription>
               </DialogHeader>
               <ShopForm
-                performAction={async (values) => {
+                onSubmit={async (values) => {
                   "use server"
                   const { userId } = getFromHeaders()
 
@@ -54,15 +54,17 @@ export default async function ShopPage() {
                       .insert(shop)
                       .values({
                         ...values,
-                        userId,
+                        updatedBy: userId,
                       })
                       .returning({
                         id: shop.id,
                       })
 
                     await tx.insert(member).values({
-                      userId,
+                      updatedBy: userId,
                       shopId: shopRes.id,
+                      role: "ADMIN",
+                      userId,
                     })
                   })
                 }}

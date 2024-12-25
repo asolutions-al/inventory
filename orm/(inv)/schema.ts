@@ -1,14 +1,6 @@
-/**
- * REMINDER:
- * Whenerver introspection is done, the schema file will update.
- * But for movement table, the productsDetails column will be missing types since it's a jsonb column.
- * To fix this, we need to manually add the types to the schema file.
- * Just place the below code at the chain of productDetails column in the schema file.
- * .$type<SelectProductType>()
- */
-
 import {
   bigint,
+  foreignKey,
   jsonb,
   pgEnum,
   pgTable,
@@ -16,7 +8,6 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core"
-import { SelectProductType } from "../../db/(inv)/schema"
 
 export const aal_level = pgEnum("aal_level", ["aal1", "aal2", "aal3"])
 export const code_challenge_method = pgEnum("code_challenge_method", [
@@ -52,12 +43,10 @@ export const key_type = pgEnum("key_type", [
   "secretstream",
   "stream_xchacha20",
 ])
-export const PLAN = pgEnum("PLAN", ["INV-STARTER", "INV-PRO", "INV-BUSINESS"])
-export const billingPeriod = pgEnum("billingPeriod", ["MONTHLY", "YEARLY"])
-export const partyType = pgEnum("partyType", ["CUSTOMER", "SUPPLIER"])
-export const role = pgEnum("role", ["MEMBER", "ADMIN"])
+export const party_type = pgEnum("party_type", ["CUSTOMER", "SUPPLIER"])
+export const role = pgEnum("role", ["ADMIN", "MEMBER"])
 export const status = pgEnum("status", ["DRAFT", "ACTIVE", "ARCHIVED"])
-export const transReason = pgEnum("transReason", [
+export const transaction_reason = pgEnum("transaction_reason", [
   "PURCHASE",
   "RETURN",
   "FOUND",
@@ -68,7 +57,7 @@ export const transReason = pgEnum("transReason", [
   "TRANSFER",
   "ADJUSMENT",
 ])
-export const type = pgEnum("type", ["IN", "OUT"])
+export const transaction_type = pgEnum("transaction_type", ["IN", "OUT"])
 export const action = pgEnum("action", [
   "INSERT",
   "UPDATE",
@@ -86,132 +75,160 @@ export const equality_op = pgEnum("equality_op", [
   "in",
 ])
 
-export const party = pgTable("party", {
-  id: uuid("id").defaultRandom().primaryKey().notNull(),
-  created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
+export const category = pgTable("category", {
+  createdAt: timestamp("createdAt", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
+  updatedBy: uuid("updatedBy")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
   shopId: uuid("shopId")
     .notNull()
     .references(() => shop.id, { onDelete: "cascade", onUpdate: "cascade" }),
   name: text("name").notNull(),
-  type: partyType("type").notNull(),
-  status: status("status").notNull(),
-})
-
-export const accounts = pgTable("accounts", {
+  color: text("color").notNull(),
   id: uuid("id").defaultRandom().primaryKey().notNull(),
 })
 
-export const member = pgTable("member", {
+export const party = pgTable("party", {
   id: uuid("id").defaultRandom().primaryKey().notNull(),
-  shopId: uuid("shopId")
-    .notNull()
-    .references(() => shop.id, { onDelete: "cascade", onUpdate: "cascade" }),
-  userId: uuid("userId")
-    .notNull()
-    .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
   createdAt: timestamp("createdAt", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
-  role: role("role").default("ADMIN").notNull(),
+  updatedBy: uuid("updatedBy")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
+  shopId: uuid("shopId")
+    .notNull()
+    .references(() => shop.id, { onDelete: "cascade", onUpdate: "cascade" }),
+  name: text("name").notNull(),
+  status: status("status").notNull(),
+  type: party_type("type").notNull(),
 })
 
 export const invitation = pgTable("invitation", {
-  created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
+  createdAt: timestamp("createdAt", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
+  updatedBy: uuid("updatedBy")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
   fromUserId: uuid("fromUserId")
     .notNull()
     .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
   fromShopId: uuid("fromShopId")
     .notNull()
     .references(() => shop.id, { onDelete: "cascade", onUpdate: "cascade" }),
-  id: uuid("id").defaultRandom().primaryKey().notNull(),
   role: role("role").notNull(),
-})
-
-export const productImages = pgTable("productImages", {
-  created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
-    .defaultNow()
-    .notNull(),
-  productId: uuid("productId")
-    .notNull()
-    .references(() => products.id, {
-      onDelete: "cascade",
-      onUpdate: "cascade",
-    }),
-  path: text("path").notNull(),
-  fullPath: text("fullPath").notNull(),
-  url: text("url").notNull(),
   id: uuid("id").defaultRandom().primaryKey().notNull(),
 })
 
-export const transaction = pgTable("transaction", {
+export const shop = pgTable("shop", {
   id: uuid("id").defaultRandom().primaryKey().notNull(),
-  date: timestamp("date", { withTimezone: true, mode: "string" }).notNull(),
-  shopId: uuid("shopId")
-    .notNull()
-    .references(() => shop.id, { onDelete: "cascade", onUpdate: "cascade" }),
   createdAt: timestamp("createdAt", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
-  type: type("type").notNull(),
-  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-  amount: bigint("amount", { mode: "number" }).notNull(),
-  userId: uuid("userId")
+  updatedBy: uuid("updatedBy")
     .notNull()
     .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
-  reason: transReason("reason").notNull(),
+  name: text("name").notNull(),
+  description: text("description"),
 })
 
-export const user = pgTable("user", {
-  id: uuid("id").primaryKey().notNull(),
-  email: text("email").notNull(),
-})
-
-export const categories = pgTable("categories", {
-  id: uuid("id").defaultRandom().primaryKey().notNull(),
-  created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
+export const transaction = pgTable("transaction", {
+  createdAt: timestamp("createdAt", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
-  name: text("name").notNull(),
+  updatedBy: uuid("updatedBy")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
   shopId: uuid("shopId")
     .notNull()
     .references(() => shop.id, { onDelete: "cascade", onUpdate: "cascade" }),
-  color: text("color"),
-})
-
-export const movement = pgTable("movement", {
-  id: uuid("id").defaultRandom().primaryKey().notNull(),
-  productId: uuid("productId")
-    .notNull()
-    .references(() => products.id, {
-      onDelete: "cascade",
-      onUpdate: "cascade",
-    }),
+  date: timestamp("date", { withTimezone: true, mode: "string" }).notNull(),
+  type: transaction_type("type").notNull(),
+  reason: transaction_reason("reason").notNull(),
   // You can use { mode: "bigint" } if numbers are exceeding js number limitations
   amount: bigint("amount", { mode: "number" }).notNull(),
-  type: type("type").notNull(),
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
+})
+
+export const user = pgTable(
+  "user",
+  {
+    id: uuid("id").primaryKey().notNull(),
+    createdAt: timestamp("createdAt", { withTimezone: true, mode: "string" })
+      .defaultNow()
+      .notNull(),
+    updatedBy: uuid("updatedBy").notNull(),
+    email: text("email").notNull(),
+  },
+  (table) => {
+    return {
+      user_updatedBy_fkey: foreignKey({
+        columns: [table.updatedBy],
+        foreignColumns: [table.id],
+        name: "user_updatedBy_fkey",
+      })
+        .onUpdate("cascade")
+        .onDelete("cascade"),
+    }
+  }
+)
+
+export const movement = pgTable("movement", {
+  createdAt: timestamp("createdAt", { withTimezone: true, mode: "string" })
+    .defaultNow()
+    .notNull(),
+  updatedBy: uuid("updatedBy")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
+  productId: uuid("productId")
+    .notNull()
+    .references(() => product.id, { onDelete: "cascade", onUpdate: "cascade" }),
+  shopId: uuid("shopId")
+    .notNull()
+    .references(() => shop.id, { onDelete: "cascade", onUpdate: "cascade" }),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  amount: bigint("amount", { mode: "number" }).notNull(),
+  type: transaction_type("type").notNull(),
+  productDetails: jsonb("productDetails").notNull(),
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
   transactionId: uuid("transactionId")
     .notNull()
     .references(() => transaction.id, {
       onDelete: "cascade",
       onUpdate: "cascade",
     }),
+})
+
+export const member = pgTable("member", {
+  id: uuid("id").defaultRandom().primaryKey().notNull(),
   createdAt: timestamp("createdAt", { withTimezone: true, mode: "string" })
     .defaultNow()
     .notNull(),
-  userId: uuid("userId")
+  updatedBy: uuid("updatedBy")
     .notNull()
     .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
   shopId: uuid("shopId")
     .notNull()
     .references(() => shop.id, { onDelete: "cascade", onUpdate: "cascade" }),
-  productDetails: jsonb("productDetails").notNull().$type<SelectProductType>(),
+  userId: uuid("userId")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
+  role: role("role").notNull(),
 })
 
-export const products = pgTable("products", {
+export const product = pgTable("product", {
+  createdAt: timestamp("createdAt", { withTimezone: true, mode: "string" })
+    .defaultNow()
+    .notNull(),
+  updatedBy: uuid("updatedBy")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
+  shopId: uuid("shopId")
+    .notNull()
+    .references(() => shop.id, { onDelete: "cascade", onUpdate: "cascade" }),
   name: text("name").notNull(),
   // You can use { mode: "bigint" } if numbers are exceeding js number limitations
   currentStock: bigint("currentStock", { mode: "number" }).notNull(),
@@ -221,52 +238,8 @@ export const products = pgTable("products", {
   price: bigint("price", { mode: "number" }).notNull(),
   // You can use { mode: "bigint" } if numbers are exceeding js number limitations
   commission: bigint("commission", { mode: "number" }).notNull(),
-  barcode: text("barcode"),
-  id: uuid("id").defaultRandom().primaryKey().notNull(),
-  shopId: uuid("shopId")
-    .notNull()
-    .references(() => shop.id, { onDelete: "cascade", onUpdate: "cascade" }),
-  createdAt: timestamp("createdAt", { withTimezone: true, mode: "string" })
-    .defaultNow()
-    .notNull(),
-  userId: uuid("userId")
-    .notNull()
-    .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
-  description: text("description"),
   status: status("status").notNull(),
-  categoryId: uuid("categoryId").references(() => categories.id, {
-    onDelete: "set null",
-    onUpdate: "cascade",
-  }),
-})
-
-export const shop = pgTable("shop", {
-  id: uuid("id").defaultRandom().primaryKey().notNull(),
-  name: text("name").notNull(),
-  createdAt: timestamp("createdAt", { withTimezone: true, mode: "string" })
-    .defaultNow()
-    .notNull(),
-  userId: uuid("userId")
-    .notNull()
-    .references(() => user.id, { onDelete: "cascade", onUpdate: "cascade" }),
+  barcode: text("barcode"),
   description: text("description"),
-})
-
-export const subscription = pgTable("subscription", {
   id: uuid("id").defaultRandom().primaryKey().notNull(),
-  createdAt: timestamp("createdAt", { withTimezone: true, mode: "string" })
-    .defaultNow()
-    .notNull(),
-  shopId: uuid("shopId")
-    .notNull()
-    .references(() => shop.id, { onDelete: "cascade", onUpdate: "cascade" }),
-  startDate: timestamp("startDate", {
-    withTimezone: true,
-    mode: "string",
-  }).notNull(),
-  endDate: timestamp("endDate", {
-    withTimezone: true,
-    mode: "string",
-  }).notNull(),
-  plan: PLAN("plan"),
 })

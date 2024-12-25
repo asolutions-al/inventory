@@ -8,7 +8,7 @@ import {
   getCategories,
 } from "@/lib/supabase"
 import { uploadProductImages } from "@/lib/supabase/edge-actions"
-import { products } from "@/orm/(inv)/schema"
+import { product } from "@/orm/(inv)/schema"
 import { eq } from "drizzle-orm"
 import { getTranslations } from "next-intl/server"
 
@@ -22,9 +22,9 @@ type Args = {
 async function DuplicateProductPage({ params }: Args) {
   const t = await getTranslations()
   const { id } = params
-  const data = await db.query.products.findFirst({
-    where: eq(products.id, id),
-    with: { productImages: true },
+  const data = await db.query.product.findFirst({
+    where: eq(product.id, id),
+    // with: { productImages: true },
   })
   const categoriesList = await getCategories()
 
@@ -38,6 +38,7 @@ async function DuplicateProductPage({ params }: Args) {
           if (formData) await uploadProductImages({ id: res.id, formData })
         }}
         categoriesList={categoriesList}
+        // @ts-ignore
         defaultValues={data}
         createNewCategory={createCategory}
         deleteCategory={deleteCategory}

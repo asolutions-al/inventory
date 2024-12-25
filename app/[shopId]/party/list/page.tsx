@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card"
 import { RoleWrapper } from "@/components/wrappers"
 import { getMember } from "@/lib/supabase"
-import { movement, products, status } from "@/orm/(inv)/schema"
+import { movement, product, status } from "@/orm/(inv)/schema"
 import { Status } from "@/types"
 import { getFromHeaders } from "@/utils/general"
 import { and, desc, eq } from "drizzle-orm"
@@ -31,8 +31,8 @@ export default async function PartyListPage({
   const { shopId } = getFromHeaders()
 
   const data = await db.query.party.findMany({
-    where: and(eq(products.shopId, shopId), eq(products.status, statusParam)),
-    orderBy: products.name,
+    where: and(eq(product.shopId, shopId), eq(product.status, statusParam)),
+    orderBy: product.name,
   })
 
   return (
@@ -77,7 +77,7 @@ async function ProductMovements({ id }: { id?: string }) {
 
   const filters = [eq(movement.productId, id)]
 
-  if (role === "MEMBER") filters.push(eq(movement.userId, userId))
+  if (role === "MEMBER") filters.push(eq(movement.updatedBy, userId))
 
   const movements = await db.query.movement.findMany({
     where: and(...filters),
@@ -86,5 +86,7 @@ async function ProductMovements({ id }: { id?: string }) {
       user: true,
     },
   })
+  // @ts-ignore
+
   return <ProductMovementsSheet data={movements} />
 }

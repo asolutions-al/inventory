@@ -17,7 +17,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { DATE_TABS } from "@/contants/list"
 import { useDateTabs } from "@/hooks"
 import { getMember } from "@/lib/supabase"
-import { movement, products, transaction } from "@/orm/(inv)/schema"
+import { movement, product, transaction } from "@/orm/(inv)/schema"
 import { getFromHeaders } from "@/utils/general"
 import { and, desc, eq, gte, lte, sql } from "drizzle-orm"
 import { getTranslations } from "next-intl/server"
@@ -44,7 +44,7 @@ export default async function TransactionsPage({
     lte(transaction.date, end.toISOString()),
   ]
 
-  if (role !== "ADMIN") qry.push(eq(transaction.userId, userId))
+  if (role !== "ADMIN") qry.push(eq(transaction.updatedBy, userId))
 
   const data = await db.query.transaction.findMany({
     where: and(...qry),
@@ -61,13 +61,13 @@ export default async function TransactionsPage({
     movements.forEach(async (m) => {
       // TODO: what could be a better way?
       await db
-        .update(products)
+        .update(product)
         .set({
-          currentStock: sql`${products.currentStock} + ${
+          currentStock: sql`${product.currentStock} + ${
             m.amount * (m.type === "IN" ? -1 : 1)
           }`,
         })
-        .where(eq(products.id, m.productId))
+        .where(eq(product.id, m.productId))
     })
     await db.delete(transaction).where(eq(transaction.id, row)) // cascade will delete movements
   }
@@ -135,5 +135,6 @@ async function SSActionDetails({
     },
   })
 
+  // @ts-ignore
   return <ActionDetails data={movements} action={action} />
 }

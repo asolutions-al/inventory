@@ -18,7 +18,7 @@ import { RoleWrapper } from "@/components/wrappers"
 import { TAB_START_END } from "@/contants/maps"
 import { useStatusTabs } from "@/hooks"
 import { getMember } from "@/lib/supabase"
-import { movement, products, status } from "@/orm/(inv)/schema"
+import { movement, product, status } from "@/orm/(inv)/schema"
 import { getFromHeaders } from "@/utils/general"
 import { differenceInDays, isBefore } from "date-fns"
 import { and, desc, eq, gte, lte } from "drizzle-orm"
@@ -35,12 +35,12 @@ export default async function ProductsPage({
   const { validTab } = useStatusTabs({ tabParam: searchParams.tab })
   const { row, action } = searchParams
   const { shopId } = getFromHeaders()
-  const data = await db.query.products.findMany({
-    where: and(eq(products.shopId, shopId), eq(products.status, validTab)),
-    orderBy: products.name,
+  const data = await db.query.product.findMany({
+    where: and(eq(product.shopId, shopId), eq(product.status, validTab)),
+    orderBy: product.name,
     with: {
-      category: true,
-      productImages: true,
+      // category: true,
+      // productImages: true,
     },
   })
   console.log("data", data)
@@ -122,6 +122,7 @@ export default async function ProductsPage({
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {/* @ts-ignore */}
           <DataTable columns={productColumns} data={finalData} />
         </CardContent>
       </Card>
@@ -146,7 +147,7 @@ async function ProductMovements({ id }: { id?: string }) {
 
   const filters = [eq(movement.productId, id)]
 
-  if (role === "MEMBER") filters.push(eq(movement.userId, userId))
+  if (role === "MEMBER") filters.push(eq(movement.updatedBy, userId))
 
   const movements = await db.query.movement.findMany({
     where: and(...filters),
@@ -155,5 +156,6 @@ async function ProductMovements({ id }: { id?: string }) {
       user: true,
     },
   })
+  // @ts-ignore
   return <ProductMovementsSheet data={movements} />
 }
