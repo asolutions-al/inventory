@@ -47,7 +47,7 @@ async function UpdateProductPage({ params }: Args) {
 
             if (formData) await uploadProductImages({ id: res.id, formData })
 
-            revalidatePath("/[lang]/[shopId]/products")
+            revalidatePath("/[lang]/[shopId]/product")
           } catch (error) {
             console.error(error)
           }

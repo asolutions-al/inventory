@@ -93,7 +93,7 @@ export default async function ProductsPage({
             {status.enumValues.map((status) => (
               <Link
                 key={status}
-                href={`/${shopId}/products?tab=${status}`}
+                href={`/${shopId}/product?tab=${status}`}
                 passHref
               >
                 <TabsTrigger value={status}>{t(status)}</TabsTrigger>
@@ -102,7 +102,7 @@ export default async function ProductsPage({
           </TabsList>
           <div className="ml-auto flex items-center gap-2">
             <RoleWrapper requiredRole="ADMIN">
-              <Link href={`/${shopId}/products/create`}>
+              <Link href={`/${shopId}/product/create`}>
                 <Button size="sm" className="h-8 gap-1">
                   <PlusCircle className="h-3.5 w-3.5" />
                   <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">

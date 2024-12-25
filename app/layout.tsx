@@ -9,7 +9,7 @@ import "./globals.css"
 
 export const metadata = {
   metadataBase: new URL(appUrl),
-  title: "Inv",
+  title: "Inventory",
   description: "The fastest way to manage your inventory",
 }
 

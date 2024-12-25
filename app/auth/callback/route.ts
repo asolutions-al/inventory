@@ -4,10 +4,12 @@ import { invitation, member, user as schUser, shop } from "@/orm/(inv)/schema"
 import { getAuthUrl } from "@/utils/supabase/auth"
 import { createAuthClient } from "@/utils/supabase/server"
 import { and, eq } from "drizzle-orm"
+import { getTranslations } from "next-intl/server"
 import { NextResponse } from "next/server"
 
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url)
+  const t = await getTranslations()
   const { origin, pathname } = requestUrl
 
   const invId = requestUrl.searchParams.get("invId")
@@ -98,8 +100,8 @@ export async function GET(request: Request) {
         const [resShop] = await tx
           .insert(shop)
           .values({
-            name: "My First Shop",
-            description: "This is my first shop",
+            name: t("My Shop"),
+            description: t("My First Shop"),
             updatedBy: userId,
           })
           .returning({

@@ -27,7 +27,7 @@ export const createProduct = async (values: InsertProductFormType) => {
       id: product.id,
     })
 
-  revalidatePath("/[lang]/[shopId]/products")
+  revalidatePath("/[lang]/[shopId]/product")
   return res
 }
 
@@ -38,13 +38,13 @@ export const createCategory = async (values: InsertCategoryFormType) => {
     ...values,
     shopId,
   })
-  revalidatePath("/[lang]/[shopId]/products/create") //TODO: can optimize this
+  revalidatePath("/[lang]/[shopId]/product/create") //TODO: can optimize this
 }
 
 export const deleteCategory = async (id: string) => {
   "use server"
   await db.delete(category).where(eq(category.id, id))
-  revalidatePath("/[lang]/[shopId]/products/create")
+  revalidatePath("/[lang]/[shopId]/product/create")
 }
 
 export const createTransaction = async (

@@ -26,7 +26,7 @@ export const SIDEBAR_ITEMS: {
   {
     icon: Package,
     label: "Products",
-    href: "/products",
+    href: "/product",
   },
 
   {

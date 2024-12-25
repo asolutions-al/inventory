@@ -108,7 +108,7 @@ export function ProductForm({
       await performAction(values, formData)
       form.reset()
       toast.success(t("Product saved successfully"))
-      router.push(`/${shopId}/products`)
+      router.push(`/${shopId}/product`)
     } catch (error) {
       console.error("error", error)
       toast.error(

@@ -1,18 +1,11 @@
 "use client"
 
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Package,
-  Settings2,
-  UserIcon,
-} from "lucide-react"
+import { BookOpen, Bot, Package, Settings2, UserIcon } from "lucide-react"
 import * as React from "react"
 
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { ShopSwitcher } from "@/components/shop-switcher"
 import {
   Sidebar,
   SidebarContent,
@@ -43,11 +36,7 @@ export function AppSidebar({
       email: props.user?.email!,
       avatar: "/avatars/shadcn.jpg",
     },
-    teams: shopsList.map((shop) => ({
-      name: shop.name,
-      logo: AudioWaveform,
-      plan: shop.description || "",
-    })),
+    teams: shopsList,
     navMain: [
       {
         title: t("Inventory"),
@@ -92,11 +81,11 @@ export function AppSidebar({
         items: [
           {
             title: t("List"),
-            url: `/${shopId}/products`,
+            url: `/${shopId}/product`,
           },
           {
             title: t("Create"),
-            url: `/${shopId}/products/create`,
+            url: `/${shopId}/product/create`,
           },
         ],
       },
@@ -184,7 +173,7 @@ export function AppSidebar({
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <ShopSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
