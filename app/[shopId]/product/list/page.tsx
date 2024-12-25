@@ -93,7 +93,7 @@ export default async function ProductsPage({
             {status.enumValues.map((status) => (
               <Link
                 key={status}
-                href={`/${shopId}/product?tab=${status}`}
+                href={`/${shopId}/product/list?tab=${status}`}
                 passHref
               >
                 <TabsTrigger value={status}>{t(status)}</TabsTrigger>

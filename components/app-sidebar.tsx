@@ -81,7 +81,7 @@ export function AppSidebar({
         items: [
           {
             title: t("List"),
-            url: `/${shopId}/product`,
+            url: `/${shopId}/product/list`,
           },
           {
             title: t("Create"),
