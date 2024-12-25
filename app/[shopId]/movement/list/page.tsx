@@ -59,7 +59,7 @@ export default async function MovementPage({
                 {DATE_TABS.map((tab) => (
                   <Link
                     key={tab}
-                    href={`/${shopId}/movement?tab=${tab}`}
+                    href={`/${shopId}/movement/list?tab=${tab}`}
                     passHref
                   >
                     <TabsTrigger value={tab}>{t(tab)}</TabsTrigger>

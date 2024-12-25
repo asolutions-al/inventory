@@ -66,7 +66,7 @@ export function AppSidebar({
           },
           {
             title: t("Movements"),
-            url: `/${shopId}/movement`,
+            url: `/${shopId}/movement/list`,
           },
           {
             title: t("Transactions"),

@@ -42,7 +42,7 @@ export const SIDEBAR_ITEMS: {
   {
     icon: ArrowUpDown,
     label: "Movement",
-    href: "/movement",
+    href: "/movement/list",
   },
   {
     icon: ReceiptText,
