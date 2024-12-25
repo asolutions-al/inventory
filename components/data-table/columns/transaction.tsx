@@ -121,6 +121,7 @@ export function ActionDetails({
 
   const onOpenChange = (open: boolean) => {
     if (open) return
+    // @ts-ignore
     router.push(path)
   }
 

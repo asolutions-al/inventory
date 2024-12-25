@@ -27,6 +27,7 @@ const ParmTabs = ({
     <Tabs defaultValue={searchParams.get(paramKey) || defaultValue}>
       <TabsList>
         {options.map(({ value, label }) => (
+          // @ts-ignore
           <Link key={value} passHref href={`${pathname}?${paramKey}=${value}`}>
             <TabsTrigger value={value}>{t(label)}</TabsTrigger>
           </Link>

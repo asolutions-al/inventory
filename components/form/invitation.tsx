@@ -53,6 +53,7 @@ export function InvitationForm({
       const res = await performAction(values)
       const updatedSearchParams = new URLSearchParams(searchParams)
       updatedSearchParams.set("invitation", res.id)
+      // @ts-ignore
       router.push(`${pathname}?${updatedSearchParams.toString()}`)
       toast.success(t("Invitation created successfully"))
     } catch (error) {

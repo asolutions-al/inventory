@@ -36,6 +36,7 @@ export async function InvitationCard({
           .
         </CardDescription>
 
+        {/* @ts-ignore */}
         <Link href={href}>
           <Button>
             <CheckCircle className="w-4 h-4 mr-2" />

@@ -41,6 +41,7 @@ export function AppHeader() {
                     <BreadcrumbPage>{path}</BreadcrumbPage>
                   ) : (
                     <BreadcrumbLink asChild>
+                      {/* @ts-ignore */}
                       <Link href={href}>{path}</Link>
                     </BreadcrumbLink>
                   )}

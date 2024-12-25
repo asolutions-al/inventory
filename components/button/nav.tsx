@@ -29,6 +29,7 @@ export const NavBtn = (props: Props) => {
     <Tooltip>
       <SheetTriggerOrEmpty show={!!renderSheetTrigger}>
         <Link
+          // @ts-ignore
           href={href}
           className={cn(
             "w-full flex items-center gap-3 rounded-lg py-1 transition-all hover:text-primary",

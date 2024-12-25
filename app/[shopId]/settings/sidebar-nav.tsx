@@ -33,6 +33,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
         return (
           <Link
             key={item.href}
+            // @ts-ignore
             href={href}
             className={cn(
               buttonVariants({ variant: "ghost" }),

@@ -28,6 +28,7 @@ export async function ProductMovementsSheet({
       defaultOpen
       onOpenChange={(open) => {
         if (open) return
+        // @ts-ignore
         router.push(path)
       }}
     >

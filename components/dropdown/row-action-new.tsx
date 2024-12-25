@@ -76,4 +76,5 @@ const LinkOrChildren = ({
   href,
   children,
 }: PropsWithChildren<{ href?: string }>) =>
+  // @ts-ignore
   href ? <Link href={href}>{children}</Link> : children

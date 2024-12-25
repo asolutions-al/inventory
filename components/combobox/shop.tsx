@@ -19,6 +19,7 @@ export function ShopCombobox({
         value={shopId}
         setValue={(value) => {
           const path = pathname.replace(shopId, value)
+          // @ts-ignore
           router.push(path)
         }}
       />

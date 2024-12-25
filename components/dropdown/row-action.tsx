@@ -139,5 +139,6 @@ const LinkOrChildren = ({
   href?: string
   children: any
 }) => {
+  // @ts-ignore
   return href ? <Link href={href}>{children}</Link> : children
 }

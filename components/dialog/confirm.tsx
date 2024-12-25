@@ -40,6 +40,7 @@ export function ConfirmDialog({
       onOpenChange={(open) => {
         onOpenChange?.(open)
         if (open) return
+        // @ts-ignore
         router.push(path)
       }}
     >

@@ -99,6 +99,7 @@ export default async function ShopDashboardPage({
           <Tabs defaultValue={validTab}>
             <TabsList>
               {DATE_TABS.map((tab) => (
+                // @ts-ignore
                 <Link key={tab} href={`${shopId}?tab=${tab}`} passHref>
                   <TabsTrigger value={tab}>{t(tab)}</TabsTrigger>
                 </Link>

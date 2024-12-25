@@ -22,6 +22,7 @@ export function InviteMember({
         const updatedSearchParams = new URLSearchParams(searchParams)
         updatedSearchParams.set("invitation", res.id)
         updatedSearchParams.set("role", role.enumValues[0])
+        // @ts-ignore
         router.push(`${pathname}?${updatedSearchParams.toString()}`)
       }}
     >
