@@ -11,7 +11,7 @@ export function ShopCard({ data }: { data: SelectShopType }) {
     <Card>
       <CardHeader>
         <CardTitle>{data.name}</CardTitle>
-        <CardDescription>{data.description}.</CardDescription>
+        <CardDescription>{data.description}</CardDescription>
       </CardHeader>
     </Card>
   )

@@ -1,15 +1,9 @@
 import { ShopCard } from "@/components/card/shop"
-import { ShopForm } from "@/components/form/shop"
+import { NewShopDialogContent } from "@/components/dialog/new-shop"
 import { ShopPageHeader } from "@/components/layout/page-header/shop"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
+import { Dialog } from "@/components/ui/dialog"
 import { db } from "@/db/(inv)/instance"
-import { member, shop } from "@/orm/(inv)/schema"
+import { member } from "@/orm/(inv)/schema"
 import { getFromHeaders } from "@/utils/general"
 import { eq } from "drizzle-orm"
 import { getTranslations } from "next-intl/server"
@@ -37,39 +31,7 @@ export default async function ShopPage() {
                 <ShopCard data={shop} />
               </Link>
             ))}
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>{t("Create shop")}</DialogTitle>
-                <DialogDescription>
-                  {t("Fill in the form below to create a new shop")}
-                </DialogDescription>
-              </DialogHeader>
-              <ShopForm
-                onSubmit={async (values) => {
-                  "use server"
-                  const { userId } = getFromHeaders()
-
-                  await db.transaction(async (tx) => {
-                    const [shopRes] = await tx
-                      .insert(shop)
-                      .values({
-                        ...values,
-                        updatedBy: userId,
-                      })
-                      .returning({
-                        id: shop.id,
-                      })
-
-                    await tx.insert(member).values({
-                      updatedBy: userId,
-                      shopId: shopRes.id,
-                      role: "ADMIN",
-                      userId,
-                    })
-                  })
-                }}
-              />
-            </DialogContent>
+            <NewShopDialogContent />
           </div>
         </Dialog>
       </div>

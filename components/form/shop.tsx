@@ -31,7 +31,7 @@ export function ShopForm({ onSubmit }: Types) {
     },
   })
 
-  async function onValid(values: InsertFormShopType) {
+  const onValid = async (values: InsertFormShopType) => {
     try {
       await onSubmit(values)
       form.reset()
