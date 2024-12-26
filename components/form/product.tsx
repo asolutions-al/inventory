@@ -45,7 +45,6 @@ import { status } from "@/orm/(inv)/schema"
 import { flyImgInputUpload } from "@/utils/html"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
-import { PostgresError } from "postgres"
 import { useState } from "react"
 import { toast } from "sonner"
 import { ConfirmDialog } from "../dialog"
@@ -106,16 +105,11 @@ export function ProductForm({
       if (pickedImgFile) formData.append("image", pickedImgFile)
 
       await performAction(values, formData)
-      form.reset()
       toast.success(t("Product saved successfully"))
-      // @ts-ignore
-      router.push(`/${shopId}/product`)
+      router.back()
     } catch (error) {
       console.error("error", error)
-      toast.error(
-        (error as PostgresError)?.message ||
-          "An error occurred. Please try again later."
-      )
+      toast.error(t("An error occurred. Please try again later."))
     }
   }
 

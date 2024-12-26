@@ -1,7 +1,7 @@
 "use client"
 
 import { SortBtn } from "@/components/button"
-import { RowActionDropdown } from "@/components/dropdown"
+import { RowActionDropdownNew } from "@/components/dropdown/row-action-new"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
@@ -15,8 +15,9 @@ import {
   SelectProductType,
   SelectProductTypeWithCategory,
 } from "@/db/(inv)/schema"
+import { useGetShopId } from "@/hooks"
 import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown } from "lucide-react"
+import { ArrowUpDown, CopyPlusIcon, EditIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -176,6 +177,7 @@ export const productColumns = columns
 const Actions = ({ data }: { data: SelectProductType }) => {
   const t = useTranslations()
   const pathname = usePathname()
+  const shopId = useGetShopId()
 
   return (
     <div className="flex">
@@ -199,7 +201,21 @@ const Actions = ({ data }: { data: SelectProductType }) => {
           </TooltipContent>
         </Tooltip>
       </Link>
-      <RowActionDropdown id={data.id!} hiddenBtns={["view", "delete"]} />
+      <RowActionDropdownNew
+        items={[
+          {
+            icon: <EditIcon />,
+            name: t("Edit"),
+            href: `/${shopId}/product/update/${data.id}`,
+          },
+          {
+            name: t("Duplicate"),
+            icon: <CopyPlusIcon size={15} className="mr-2" />,
+            href: `/${shopId}/product/duplicate/${data.id}`,
+            seperator: true,
+          },
+        ]}
+      />
     </div>
   )
 }
