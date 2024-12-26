@@ -60,7 +60,7 @@ export function NavMain({
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
                         <Link
-                        {/* @ts-ignore */}
+                          // @ts-ignore
                           href={subItem.url}
                           onClick={() => setOpenMobile(false)}
                         >
