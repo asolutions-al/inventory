@@ -78,6 +78,7 @@ export type InsertUserFormType = z.infer<typeof insertUserFormSchema>
 export const insertInvitationFormSchema = createInsertSchema(invitation).omit({
   fromShopId: true,
   fromUserId: true,
+  updatedBy: true,
 })
 export type InsertInvitationFormType = z.infer<
   typeof insertInvitationFormSchema
