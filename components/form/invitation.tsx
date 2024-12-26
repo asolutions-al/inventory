@@ -30,9 +30,9 @@ import {
 } from "../ui/select"
 
 export function InvitationForm({
-  performAction,
+  onSubmit,
 }: {
-  performAction: (values: InsertInvitationFormType) => Promise<{
+  onSubmit: (values: InsertInvitationFormType) => Promise<{
     id: string
   }>
 }) {
@@ -48,9 +48,9 @@ export function InvitationForm({
     },
   })
 
-  async function onSubmit(values: InsertInvitationFormType) {
+  async function onValid(values: InsertInvitationFormType) {
     try {
-      const res = await performAction(values)
+      const res = await onSubmit(values)
       const updatedSearchParams = new URLSearchParams(searchParams)
       updatedSearchParams.set("invitation", res.id)
       // @ts-ignore
@@ -66,7 +66,7 @@ export function InvitationForm({
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onValid)} className="space-y-8">
         <div className="grid gap-2 grid-cols-2">
           <FormField
             control={form.control}

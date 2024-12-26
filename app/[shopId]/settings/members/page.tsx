@@ -87,7 +87,7 @@ async function MembersPage({ searchParams }: Args) {
             </DialogHeader>
             <div>
               <InvitationForm
-                performAction={async (values) => {
+                onSubmit={async (values) => {
                   "use server"
                   const { shopId, userId } = getFromHeaders()
                   const [res] = await db
@@ -101,6 +101,7 @@ async function MembersPage({ searchParams }: Args) {
                     .returning({
                       id: invitation.id,
                     })
+                  console.log("res", res)
                   return {
                     id: res.id,
                   }

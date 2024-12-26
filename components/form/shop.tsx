@@ -45,18 +45,10 @@ export function ShopForm({ onSubmit }: Types) {
     }
   }
 
-  async function onInvalid(errors: any) {
-    console.log("errors", errors)
-    toast.error("Please fill in the form correctly.")
-  }
-
   return (
     <>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onValid, onInvalid)}
-          className="space-y-8"
-        >
+        <form onSubmit={form.handleSubmit(onValid)} className="space-y-8">
           <div className="grid gap-4 py-4">
             <FormField
               control={form.control}
