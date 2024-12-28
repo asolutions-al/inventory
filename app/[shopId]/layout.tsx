@@ -11,14 +11,12 @@ import { redirect } from "next/navigation"
 
 type Args = {
   children: React.ReactNode
-  params: { shopId: string }
+  params: Promise<{ shopId: string }>
 }
 
-export default async function RootLayout({
-  children,
-  params: { shopId },
-}: Args) {
-  const authClient = createAuthClient()
+export default async function RootLayout({ children, params }: Args) {
+  const { shopId } = await params
+  const authClient = await createAuthClient()
   const {
     data: { user },
   } = await authClient.auth.getUser()

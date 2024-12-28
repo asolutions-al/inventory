@@ -2,7 +2,6 @@
 
 import { Column } from "@tanstack/react-table"
 
-import { useTranslations } from "next-intl"
 import { useEffect, useMemo, useState } from "react"
 import { Input } from "../ui/input"
 import {
@@ -13,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select"
+import { useTranslations } from "next-intl"
 
 export function Filter({ column }: { column: Column<any, unknown> }) {
   const t = useTranslations()

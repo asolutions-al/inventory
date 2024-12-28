@@ -10,10 +10,10 @@ import {
 import { SelectMemberTypeWithShopUser } from "@/db/(inv)/schema"
 import { ColumnDef } from "@tanstack/react-table"
 import { Trash } from "lucide-react"
-import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { DateCell } from "../cells/date"
+import { useTranslations } from "next-intl"
 
 const columns: ColumnDef<SelectMemberTypeWithShopUser>[] = [
   {

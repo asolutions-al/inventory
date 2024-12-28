@@ -14,7 +14,7 @@ export async function GET(request: Request) {
 
   const invId = requestUrl.searchParams.get("invId")
 
-  const authClient = createAuthClient()
+  const authClient = await createAuthClient()
   const {
     data: { user },
   } = await authClient.auth.getUser()

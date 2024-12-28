@@ -26,15 +26,15 @@ import Link from "next/link"
 export default async function TransactionsPage({
   searchParams,
 }: {
-  searchParams: {
+  searchParams: Promise<{
     row?: string
     action?: "movements" | "delete" | "receipt"
     tab?: string
-  }
+  }>
 }) {
   const t = await getTranslations()
   const { role } = (await getMember()) || {}
-  const { row, action, tab } = searchParams
+  const { row, action, tab } = await searchParams
   const { start, end, validTab } = useDateTabs({ tabParam: tab })
   const { shopId, userId } = await getFromHeaders()
 
@@ -53,7 +53,7 @@ export default async function TransactionsPage({
 
   const deleteTrans = async () => {
     "use server"
-    const { row } = searchParams
+    const { row } = await searchParams
     if (!row) return //TODO: handle
     const movements = await db.query.movement.findMany({
       where: eq(movement.transactionId, row),

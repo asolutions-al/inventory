@@ -16,12 +16,11 @@ import { getTranslations } from "next-intl/server"
 import Link from "next/link"
 
 type Args = {
-  searchParams: { tab?: string }
+  searchParams: Promise<{ tab?: string }>
 }
 
-export default async function ShopDashboardPage({
-  searchParams: { tab },
-}: Args) {
+export default async function ShopDashboardPage({ searchParams }: Args) {
+  const { tab } = await searchParams
   const t = await getTranslations()
   const { validTab, start, end } = useDateTabs({ tabParam: tab })
   const { shopId, userId } = await getFromHeaders()

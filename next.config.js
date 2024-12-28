@@ -1,6 +1,8 @@
 const createNextIntlPlugin = require("next-intl/plugin")
 
-const withNextIntl = createNextIntlPlugin()
+const withNextIntl = createNextIntlPlugin({
+  requestConfig: "./i18n.ts",
+})
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -13,6 +15,7 @@ const nextConfig = {
   },
   experimental: {
     typedRoutes: true,
+    dynamicIO: true,
   },
 }
 

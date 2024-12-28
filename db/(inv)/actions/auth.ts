@@ -6,7 +6,7 @@ import { redirect } from "next/navigation"
 
 const signOut = async () => {
   try {
-    const client = createAuthClient()
+    const client = await createAuthClient()
     console.log("signing out")
     await client.auth.signOut()
 

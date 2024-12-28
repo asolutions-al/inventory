@@ -8,15 +8,15 @@ import { getTranslations } from "next-intl/server"
 import { redirect } from "next/navigation"
 
 type Props = {
-  params: {
+  params: Promise<{
     shopId: string
     id: string
-  }
+  }>
 }
 
 async function UpdatePartyPage(props: Props) {
   const t = await getTranslations()
-  const { id } = props.params || {}
+  const { id } = (await props.params) || {}
 
   const data = await db.query.party.findFirst({
     where: eq(party.id, id),
