@@ -28,7 +28,7 @@ export default async function PartyListPage({
 }) {
   const { status: statusParam = "ACTIVE" } = searchParams
   const t = await getTranslations()
-  const { shopId } = getFromHeaders()
+  const { shopId } = await getFromHeaders()
 
   const data = await db.query.party.findMany({
     where: and(eq(product.shopId, shopId), eq(product.status, statusParam)),
@@ -73,7 +73,7 @@ export default async function PartyListPage({
 async function ProductMovements({ id }: { id?: string }) {
   if (!id) return null
   const { role } = (await getMember()) || {}
-  const { userId } = getFromHeaders()
+  const { userId } = await getFromHeaders()
 
   const filters = [eq(movement.productId, id)]
 

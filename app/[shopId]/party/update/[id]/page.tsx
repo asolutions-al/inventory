@@ -30,7 +30,7 @@ async function UpdatePartyPage(props: Props) {
         onSubmit={async (values) => {
           "use server"
           try {
-            const { shopId } = getFromHeaders()
+            const { shopId } = await getFromHeaders()
 
             await db.update(party).set(values).where(eq(party.id, id))
 

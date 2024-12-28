@@ -8,7 +8,7 @@ import { ShopForm } from "./shop-form"
 
 export default async function SettingsShopPage() {
   const t = await getTranslations()
-  const { shopId } = getFromHeaders()
+  const { shopId } = await getFromHeaders()
   const data = await db.query.shop.findFirst({
     where: eq(shop.id, shopId),
   })

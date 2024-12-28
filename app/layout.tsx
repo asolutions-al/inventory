@@ -21,7 +21,7 @@ export default async function RootLayout({
   const messages = await getMessages()
 
   return (
-    <html lang="en" className={GeistSans.className}>
+    <html lang="en" className={GeistSans.className} suppressHydrationWarning>
       <NextIntlClientProvider messages={messages}>
         <TooltipProvider>
           <body>

@@ -22,7 +22,7 @@ export default async function RootLayout({
   const {
     data: { user },
   } = await authClient.auth.getUser()
-  const { userId } = getFromHeaders()
+  const { userId } = await getFromHeaders()
   const members = await db.query.member.findMany({
     where: eq(member.userId, userId),
     with: {

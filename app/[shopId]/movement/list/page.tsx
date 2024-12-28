@@ -33,7 +33,7 @@ export default async function MovementPage({
   const { tab } = searchParams
   const { start, end, validTab } = useDateTabs({ tabParam: tab })
   console.log({ start, end, validTab })
-  const { shopId, userId } = getFromHeaders()
+  const { shopId, userId } = await getFromHeaders()
 
   const qry = [
     eq(movement.shopId, shopId),

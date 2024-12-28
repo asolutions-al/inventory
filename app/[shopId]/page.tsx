@@ -24,7 +24,7 @@ export default async function ShopDashboardPage({
 }: Args) {
   const t = await getTranslations()
   const { validTab, start, end } = useDateTabs({ tabParam: tab })
-  const { shopId, userId } = getFromHeaders()
+  const { shopId, userId } = await getFromHeaders()
 
   const { role } = (await getMember()) || {}
 

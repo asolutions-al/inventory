@@ -2,7 +2,7 @@ import { getFromHeaders } from "@/utils"
 
 export const getSubscription = async () => {
   "use server"
-  const { userId, shopId } = getFromHeaders()
+  const { userId, shopId } = await getFromHeaders()
 
   if (!shopId) return
 

@@ -15,7 +15,7 @@ async function CreatePartyPage() {
         onSubmit={async (values) => {
           "use server"
           try {
-            const { shopId, userId } = getFromHeaders()
+            const { shopId, userId } = await getFromHeaders()
 
             await db.insert(party).values({
               ...values,

@@ -10,7 +10,7 @@ import Link from "next/link"
 
 export default async function ShopPage() {
   const t = await getTranslations()
-  const { userId } = getFromHeaders()
+  const { userId } = await getFromHeaders()
 
   const members = await db.query.member.findMany({
     where: eq(member.userId, userId),

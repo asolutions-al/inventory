@@ -34,7 +34,7 @@ export default async function ProductsPage({
   const { getStart, getEnd } = TAB_START_END["LAST30DAYS"]
   const { validTab } = useStatusTabs({ tabParam: searchParams.tab })
   const { row, action } = searchParams
-  const { shopId } = getFromHeaders()
+  const { shopId } = await getFromHeaders()
   const data = await db.query.product.findMany({
     where: and(eq(product.shopId, shopId), eq(product.status, validTab)),
     orderBy: product.name,
@@ -143,7 +143,7 @@ export default async function ProductsPage({
 async function ProductMovements({ id }: { id?: string }) {
   if (!id) return null
   const { role } = (await getMember()) || {}
-  const { userId } = getFromHeaders()
+  const { userId } = await getFromHeaders()
 
   const filters = [eq(movement.productId, id)]
 

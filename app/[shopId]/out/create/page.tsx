@@ -9,7 +9,7 @@ import { eq } from "drizzle-orm"
 const type: SelectTransactionType["type"] = "OUT"
 
 export default async function OrderPage() {
-  const { shopId } = getFromHeaders()
+  const { shopId } = await getFromHeaders()
   const productsList = await db.query.product.findMany({
     where: eq(product.shopId, shopId),
     orderBy: product.name,

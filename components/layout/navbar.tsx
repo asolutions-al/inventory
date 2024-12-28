@@ -24,7 +24,7 @@ export async function Navbar() {
   const {
     data: { user },
   } = await client.auth.getUser()
-  const { shopId, userId } = getFromHeaders()
+  const { shopId, userId } = await getFromHeaders()
   const members = await db.query.member.findMany({
     where: eq(member.userId, userId),
     with: {

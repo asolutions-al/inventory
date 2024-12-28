@@ -33,7 +33,7 @@ type Args = {
 async function MembersPage({ searchParams }: Args) {
   const t = await getTranslations()
   const { invitation: invitationParam, action, row } = searchParams
-  const { shopId } = getFromHeaders()
+  const { shopId } = await getFromHeaders()
   const data = await db.query.member.findMany({
     where: eq(member.shopId, shopId),
     with: {
@@ -89,7 +89,7 @@ async function MembersPage({ searchParams }: Args) {
               <InvitationForm
                 onSubmit={async (values) => {
                   "use server"
-                  const { shopId, userId } = getFromHeaders()
+                  const { shopId, userId } = await getFromHeaders()
                   const [res] = await db
                     .insert(invitation)
                     .values({

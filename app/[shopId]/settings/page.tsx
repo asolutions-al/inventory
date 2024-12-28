@@ -8,7 +8,7 @@ import { AccountForm } from "./account-form"
 
 export default async function SettingsAccountPage() {
   const t = await getTranslations()
-  const { userId } = getFromHeaders()
+  const { userId } = await getFromHeaders()
 
   const data = await db.query.user.findFirst({
     where: eq(user.id, userId),

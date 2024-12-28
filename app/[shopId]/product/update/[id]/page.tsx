@@ -31,7 +31,7 @@ async function UpdateProductPage({ params }: Args) {
         performAction={async (values, formData) => {
           "use server"
           try {
-            const { userId, shopId } = getFromHeaders()
+            const { userId, shopId } = await getFromHeaders()
             const [res] = await db
               .update(product)
               .set({

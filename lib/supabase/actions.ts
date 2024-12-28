@@ -13,7 +13,7 @@ import { revalidatePath } from "next/cache"
 
 export const createProduct = async (values: InsertProductFormType) => {
   "use server"
-  const { userId, shopId } = getFromHeaders()
+  const { userId, shopId } = await getFromHeaders()
 
   const [res] = await db
     .insert(product)
@@ -33,7 +33,7 @@ export const createProduct = async (values: InsertProductFormType) => {
 
 export const createCategory = async (values: InsertCategoryFormType) => {
   "use server"
-  const { shopId } = getFromHeaders()
+  const { shopId } = await getFromHeaders()
   await db.insert(category).values({
     ...values,
     shopId,
@@ -58,7 +58,7 @@ export const createTransaction = async (
   }
 ) => {
   "use server"
-  const { userId, shopId } = getFromHeaders()
+  const { userId, shopId } = await getFromHeaders()
   const { movements, ...rest } = values
   const amount = movements.reduce((acc, m) => acc + m.amount, 0)
   await db.transaction(async (tx) => {

@@ -1,3 +1,5 @@
+"use client"
+
 import { createShop } from "@/db/(inv)/actions/shop"
 import { useTranslations } from "next-intl"
 import { PropsWithChildren, useState } from "react"

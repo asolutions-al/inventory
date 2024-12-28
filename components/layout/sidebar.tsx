@@ -17,7 +17,7 @@ import { NavBtn } from "../button"
 
 export async function Sidebar() {
   const t = await getTranslations()
-  const { shopId } = getFromHeaders()
+  const { shopId } = await getFromHeaders()
   return (
     <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 md:w-60 flex-col border-r bg-muted/40 sm:flex">
       <div className="py-3 border-b h-14">

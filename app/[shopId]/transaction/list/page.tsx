@@ -36,7 +36,7 @@ export default async function TransactionsPage({
   const { role } = (await getMember()) || {}
   const { row, action, tab } = searchParams
   const { start, end, validTab } = useDateTabs({ tabParam: tab })
-  const { shopId, userId } = getFromHeaders()
+  const { shopId, userId } = await getFromHeaders()
 
   const qry = [
     eq(transaction.shopId, shopId),

@@ -7,7 +7,7 @@ import { InsertFormShopType } from "../schema"
 
 const createShop = async (values: InsertFormShopType) => {
   try {
-    const { userId } = getFromHeaders()
+    const { userId } = await getFromHeaders()
 
     await db.transaction(async (tx) => {
       const [shopRes] = await tx

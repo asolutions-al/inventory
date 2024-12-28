@@ -22,7 +22,7 @@ export default async function AuthButton({
   signOut: () => void
   user: User | null
 }) {
-  const { shopId } = getFromHeaders()
+  const { shopId } = await getFromHeaders()
   const t = await getTranslations()
   return (
     <DropdownMenu>
