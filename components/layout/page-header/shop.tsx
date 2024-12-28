@@ -4,9 +4,10 @@ import { BackButton } from "@/components/button/back"
 import { Button } from "@/components/ui/button"
 import { DialogTrigger } from "@radix-ui/react-dialog"
 import { PlusCircle } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 export function ShopPageHeader() {
-  const t = (key: string) => key
+  const t = useTranslations()
 
   return (
     <>

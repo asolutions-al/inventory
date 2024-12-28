@@ -12,9 +12,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select"
+import { useTranslations } from "next-intl"
 
 export function Filter({ column }: { column: Column<any, unknown> }) {
-  const t = (key: string) => key
+  const t = useTranslations()
 
   const columnFilterValue = column.getFilterValue()
   const { filterVariant } = column.columnDef.meta ?? {}

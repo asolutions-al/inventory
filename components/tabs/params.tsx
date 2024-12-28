@@ -1,6 +1,7 @@
 "use client"
 
 import { Messages } from "@/global"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs"
@@ -18,7 +19,7 @@ const ParmTabs = ({
   paramKey: string
   options: Option[]
 }) => {
-  const t = (key: string) => key
+  const t = useTranslations()
   const pathname = usePathname()
   const searchParams = useSearchParams()
 

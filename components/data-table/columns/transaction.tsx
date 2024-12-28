@@ -18,6 +18,7 @@ import {
 import { useClearSearchParams } from "@/hooks"
 import { ColumnDef } from "@tanstack/react-table"
 import { HistoryIcon, PrinterIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { DateCell } from "../cells"
@@ -55,7 +56,7 @@ const columns: ColumnDef<SelectTransactionType>[] = [
 export const transactionColumns = columns
 
 const Actions = ({ data }: { data: SelectTransactionType }) => {
-  const t = (key: string) => key
+  const t = useTranslations()
   const pathname = usePathname()
 
   return (

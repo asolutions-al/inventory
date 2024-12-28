@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog"
 import { Messages } from "@/global"
 import { useClearSearchParams } from "@/hooks"
+import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { PostgresError } from "postgres"
 import { toast } from "sonner"
@@ -29,7 +30,7 @@ export function ConfirmDialog({
   extraDescription?: keyof Messages
   onOpenChange?: (open: boolean) => void
 }) {
-  const t = (key: string) => key
+  const t = useTranslations()
   const router = useRouter()
   const { path } = useClearSearchParams({ keys: ["row", "action"] })
 

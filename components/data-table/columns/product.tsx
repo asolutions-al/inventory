@@ -18,6 +18,7 @@ import {
 import { useGetShopId } from "@/hooks"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, CopyPlusIcon, EditIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -77,7 +78,7 @@ const columns: ColumnDef<SelectProduct>[] = [
   {
     accessorKey: "stockLeft",
     header: ({ column }) => {
-      const t = (key: string) => key
+      const t = useTranslations()
       return (
         <TooltipProvider>
           <Tooltip>
@@ -107,7 +108,7 @@ const columns: ColumnDef<SelectProduct>[] = [
       filterVariant: "range",
     },
     cell: ({ row }) => {
-      const t = (key: string) => key
+      const t = useTranslations()
       const data = row.original
       const { stockLeft } = data
       const hasNoSales = stockLeft === Infinity || isNaN(stockLeft)
@@ -174,7 +175,7 @@ const columns: ColumnDef<SelectProduct>[] = [
 export const productColumns = columns
 
 const Actions = ({ data }: { data: SelectProductType }) => {
-  const t = (key: string) => key
+  const t = useTranslations()
   const pathname = usePathname()
   const shopId = useGetShopId()
 

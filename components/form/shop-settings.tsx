@@ -6,6 +6,7 @@ import {
   SelectShopType,
 } from "@/db/(inv)/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useTranslations } from "next-intl"
 import { PostgresError } from "postgres"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -19,7 +20,7 @@ export function ShopSettingsForm({
   defaultValues?: SelectShopType
   performAction: (values: InsertFormShopType) => Promise<void>
 }) {
-  const t = (key: string) => key
+  const t = useTranslations()
   const form = useForm<InsertFormShopType>({
     resolver: zodResolver(insertFormShopSchema),
     defaultValues: {

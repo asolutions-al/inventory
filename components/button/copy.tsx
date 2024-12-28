@@ -2,6 +2,7 @@
 
 import { Button, ButtonProps } from "@/components/ui/button"
 import { ClipboardIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 
 export const CopyBtn = ({
@@ -13,7 +14,7 @@ export const CopyBtn = ({
   value: string
   rest?: ButtonProps
 }) => {
-  const t = (key: string) => key
+  const t = useTranslations()
   return (
     <Button
       variant="outline"

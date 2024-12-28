@@ -1,4 +1,5 @@
 import { Messages } from "@/global"
+import { useTranslations } from "next-intl"
 import { FieldValues, UseFormReturn } from "react-hook-form"
 import { BackButton, FormSubmitBtns } from "./button"
 
@@ -9,7 +10,7 @@ const FormHeader = <T extends FieldValues>({
   title: keyof Messages
   form: UseFormReturn<T>
 }) => {
-  const t = (key: string) => key
+  const t = useTranslations()
   return (
     <div className="flex items-center gap-4">
       <BackButton />

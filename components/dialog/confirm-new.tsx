@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog"
 import { Messages } from "@/global"
 import { Check, X } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { PostgresError } from "postgres"
 import { ReactNode } from "react"
 import { toast } from "sonner"
@@ -27,7 +28,7 @@ export function ConfirmDialogNew({
   title: keyof Messages
   children: ReactNode
 }) {
-  const t = (key: string) => key
+  const t = useTranslations()
 
   return (
     <Dialog>

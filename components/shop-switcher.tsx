@@ -18,12 +18,13 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { SelectShopType } from "@/db/(inv)/schema"
+import { useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
 import { NewShopDialog } from "./dialog/new-shop"
 import { DialogTrigger } from "./ui/dialog"
 
 export function ShopSwitcher({ teams }: { teams: SelectShopType[] }) {
-  const t = (key: string) => key
+  const t = useTranslations()
   const { isMobile } = useSidebar()
   const params = useParams<{ shopId: string }>()
   const activeTeam = teams.find((team) => team.id === params.shopId)!

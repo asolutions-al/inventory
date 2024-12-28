@@ -15,6 +15,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { useTranslations } from "next-intl"
 
 type Data = {
   id: string
@@ -27,7 +28,7 @@ type Props = {
 }
 
 function Chart({ data }: Props) {
-  const t = (key: string) => key
+  const t = useTranslations()
 
   const mappedData: (Data & { fill: string })[] = data.map((item, idx) => ({
     ...item,

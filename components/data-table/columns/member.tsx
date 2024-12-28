@@ -13,6 +13,7 @@ import { Trash } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { DateCell } from "../cells/date"
+import { useTranslations } from "next-intl"
 
 const columns: ColumnDef<SelectMemberTypeWithShopUser>[] = [
   {
@@ -24,7 +25,7 @@ const columns: ColumnDef<SelectMemberTypeWithShopUser>[] = [
     accessorKey: "role",
     header: ({ column }) => <SortBtn text="Role" column={column} />,
     cell: ({ row }) => {
-      const t = (key: string) => key
+      const t = useTranslations()
       return t(row.original.role)
     },
   },
@@ -45,7 +46,7 @@ const columns: ColumnDef<SelectMemberTypeWithShopUser>[] = [
 export const memberColumns = columns
 
 const Actions = ({ data }: { data: any }) => {
-  const t = (key: string) => key
+  const t = useTranslations()
   const pathname = usePathname()
 
   return (

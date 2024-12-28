@@ -10,6 +10,7 @@ import {
 import { SelectProductType } from "@/db/(inv)/schema"
 import dayjs from "dayjs"
 import { PrinterIcon } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { Button } from "../ui/button"
 
 export type Receipt = {
@@ -30,7 +31,7 @@ export function ReceiptDialog({
   products,
   date,
 }: Receipt) {
-  const t = (key: string) => key
+  const t = useTranslations()
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

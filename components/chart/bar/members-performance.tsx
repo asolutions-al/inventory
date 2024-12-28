@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
+import { useTranslations } from "next-intl"
 
 type Props = {
   data: {
@@ -21,7 +22,7 @@ type Props = {
 }
 
 function Chart({ data }: Props) {
-  const t = (key: string) => key
+  const t = useTranslations()
 
   const config: ChartConfig = {
     in: {

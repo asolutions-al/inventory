@@ -18,6 +18,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
+import { useTranslations } from "next-intl"
 
 type ListItem = {
   value: string
@@ -38,7 +39,7 @@ export function Combobox({
   setValue: (value: string) => void
   onRightIconClick?: (item: ListItem) => void
 }) {
-  const t = (key: string) => key
+  const t = useTranslations()
   const [open, setOpen] = React.useState(false)
 
   const selected = list.find((item) => item.value === value)

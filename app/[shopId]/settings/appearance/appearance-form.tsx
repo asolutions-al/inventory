@@ -24,10 +24,10 @@ import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 import { Locale, locales } from "@/i18n"
 import { setUserLocale } from "@/services/locale"
-import { useLocale } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 export function AppearanceForm() {
-  const t = (key: string) => key
+  const t = useTranslations()
   const { setTheme, theme } = useTheme()
   const locale = useLocale() as Locale
 

@@ -16,6 +16,7 @@ import {
 import { SelectMemberType, SelectShopType } from "@/db/(inv)/schema"
 import { useGetShopId } from "@/hooks"
 import { User } from "@supabase/supabase-js"
+import { useTranslations } from "next-intl"
 
 export function AppSidebar({
   ...props
@@ -25,8 +26,7 @@ export function AppSidebar({
   })[]
   user: User | null
 }) {
-  // const t = (key: string) => key
-  const t = (key: string) => key
+  const t = useTranslations()
   const shopsList = props.members.map((member) => member.shop)
   const shopId = useGetShopId()
 

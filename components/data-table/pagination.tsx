@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select"
 import { download, generateCsv, mkConfig } from "export-to-csv"
 import { File } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>
@@ -43,7 +44,7 @@ export const flatObject = (obj: Record<string, any>) => {
 export function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
-  const t = (key: string) => key
+  const t = useTranslations()
 
   const exportExcel = (rows: Row<TData>[]) => {
     const rowData = rows.map((row) => row.original)

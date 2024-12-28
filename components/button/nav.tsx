@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/tooltip"
 import { Messages } from "@/global"
 import { cn } from "@/lib/utils"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { SheetTrigger } from "../ui/sheet"
@@ -21,7 +22,7 @@ type Props = {
 
 export const NavBtn = (props: Props) => {
   const { href, label, renderSheetTrigger } = props
-  const t = (key: string) => key
+  const t = useTranslations()
   const pathname = usePathname()
   const isActive = pathname === href
   return (
