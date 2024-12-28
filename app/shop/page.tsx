@@ -1,7 +1,6 @@
 import { ShopCard } from "@/components/card/shop"
-import { NewShopDialogContent } from "@/components/dialog/new-shop"
+import { NewShopDialog } from "@/components/dialog/new-shop"
 import { ShopPageHeader } from "@/components/layout/page-header/shop"
-import { Dialog } from "@/components/ui/dialog"
 import { db } from "@/db/(inv)/instance"
 import { member } from "@/orm/(inv)/schema"
 import { getFromHeaders } from "@/utils/general"
@@ -23,7 +22,7 @@ export default async function ShopPage() {
   return (
     <div>
       <div className="flex flex-1 flex-col gap-4 max-w-4xl p-2 mx-auto">
-        <Dialog>
+        <NewShopDialog>
           <ShopPageHeader />
           <div className="grid items-center sm:grid-cols-2 gap-4">
             {shopsList.map((shop) => (
@@ -31,9 +30,8 @@ export default async function ShopPage() {
                 <ShopCard data={shop} />
               </Link>
             ))}
-            <NewShopDialogContent />
           </div>
-        </Dialog>
+        </NewShopDialog>
       </div>
     </div>
   )

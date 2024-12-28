@@ -18,10 +18,11 @@ import { PostgresError } from "postgres"
 import { toast } from "sonner"
 
 type Types = {
-  onSubmit: (values: InsertFormShopType) => Promise<void>
+  performAction: (values: InsertFormShopType) => Promise<void>
+  onSuccess?: () => void
 }
 
-export function ShopForm({ onSubmit }: Types) {
+export function ShopForm({ performAction, onSuccess }: Types) {
   const t = useTranslations()
   const form = useForm<InsertFormShopType>({
     resolver: zodResolver(insertFormShopSchema),
@@ -33,9 +34,10 @@ export function ShopForm({ onSubmit }: Types) {
 
   const onValid = async (values: InsertFormShopType) => {
     try {
-      await onSubmit(values)
+      await performAction(values)
       form.reset()
       toast.success(t("Shop saved successfully"))
+      onSuccess?.()
     } catch (error) {
       console.error("error", error)
       toast.error(

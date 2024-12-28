@@ -20,8 +20,8 @@ import {
 import { SelectShopType } from "@/db/(inv)/schema"
 import { useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
-import { NewShopDialogContent } from "./dialog/new-shop"
-import { Dialog, DialogTrigger } from "./ui/dialog"
+import { NewShopDialog } from "./dialog/new-shop"
+import { DialogTrigger } from "./ui/dialog"
 
 export function ShopSwitcher({ teams }: { teams: SelectShopType[] }) {
   const t = useTranslations()
@@ -32,7 +32,7 @@ export function ShopSwitcher({ teams }: { teams: SelectShopType[] }) {
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <Dialog>
+        <NewShopDialog>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton
@@ -85,8 +85,7 @@ export function ShopSwitcher({ teams }: { teams: SelectShopType[] }) {
               </DialogTrigger>
             </DropdownMenuContent>
           </DropdownMenu>
-          <NewShopDialogContent />
-        </Dialog>
+        </NewShopDialog>
       </SidebarMenuItem>
     </SidebarMenu>
   )

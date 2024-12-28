@@ -1,26 +1,32 @@
 import { createShop } from "@/db/(inv)/actions/shop"
 import { useTranslations } from "next-intl"
+import { PropsWithChildren, useState } from "react"
 import { ShopForm } from "../form/shop"
 import {
+  Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog"
 
-const NewShopDialogContent = () => {
+const NewShopDialog = ({ children }: PropsWithChildren) => {
   const t = useTranslations()
+  const [open, setOpen] = useState(false)
   return (
-    <DialogContent className="sm:max-w-[425px]">
-      <DialogHeader>
-        <DialogTitle>{t("Create shop")}</DialogTitle>
-        <DialogDescription>
-          {t("Fill in the form below to create a new shop")}
-        </DialogDescription>
-      </DialogHeader>
-      <ShopForm onSubmit={createShop} />
-    </DialogContent>
+    <Dialog open={open} onOpenChange={setOpen}>
+      {children}
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>{t("Create shop")}</DialogTitle>
+          <DialogDescription>
+            {t("Fill in the form below to create a new shop")}
+          </DialogDescription>
+        </DialogHeader>
+        <ShopForm performAction={createShop} onSuccess={() => setOpen(false)} />
+      </DialogContent>
+    </Dialog>
   )
 }
 
-export { NewShopDialogContent }
+export { NewShopDialog }
