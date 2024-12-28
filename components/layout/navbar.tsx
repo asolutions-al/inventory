@@ -20,7 +20,7 @@ import { ShopCombobox } from "../combobox"
 
 export async function Navbar() {
   const t = await getTranslations()
-  const client = createAuthClient()
+  const client = await createAuthClient()
   const {
     data: { user },
   } = await client.auth.getUser()
@@ -37,7 +37,7 @@ export async function Navbar() {
   const signOut = async () => {
     "use server"
 
-    const client = createAuthClient()
+    const client = await createAuthClient()
     await client.auth.signOut()
 
     redirect(getAuthUrl())

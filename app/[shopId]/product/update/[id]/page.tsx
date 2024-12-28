@@ -10,14 +10,14 @@ import { getTranslations } from "next-intl/server"
 import { revalidatePath } from "next/cache"
 
 type Args = {
-  params: {
+  params: Promise<{
     shopId: string
     id: string
-  }
+  }>
 }
 async function UpdateProductPage({ params }: Args) {
   const t = await getTranslations()
-  const { id } = params
+  const { id } = await params
   const data = await db.query.product.findFirst({
     where: eq(product.id, id),
     // with: { productImages: true },

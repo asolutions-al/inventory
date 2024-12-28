@@ -11,7 +11,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { ChartContainer } from "@/components/ui/chart"
-import { useTranslations } from "next-intl"
 import { Separator } from "../../ui/separator"
 
 const config = {
@@ -36,7 +35,7 @@ export type IncomeChartDataType = {
 }
 
 export function IncomeChart({ data }: { data: IncomeChartDataType[] }) {
-  const t = useTranslations()
+  const t = (key: string) => key
 
   return (
     <Card x-chunk="charts-01-chunk-4">

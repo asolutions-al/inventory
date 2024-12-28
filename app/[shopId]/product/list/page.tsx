@@ -28,12 +28,16 @@ import Link from "next/link"
 export default async function ProductsPage({
   searchParams,
 }: {
-  searchParams: { row?: string; action?: "movements" | "delete"; tab?: string }
+  searchParams: Promise<{
+    row?: string
+    action?: "movements" | "delete"
+    tab?: string
+  }>
 }) {
   const t = await getTranslations()
   const { getStart, getEnd } = TAB_START_END["LAST30DAYS"]
-  const { validTab } = useStatusTabs({ tabParam: searchParams.tab })
-  const { row, action } = searchParams
+  const { row, action, tab } = await searchParams
+  const { validTab } = useStatusTabs({ tabParam: tab })
   const { shopId } = await getFromHeaders()
   const data = await db.query.product.findMany({
     where: and(eq(product.shopId, shopId), eq(product.status, validTab)),

@@ -24,7 +24,6 @@ import {
   PlusIcon,
   TrashIcon,
 } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
 import { PostgresError } from "postgres"
 import { useState } from "react"
@@ -73,7 +72,7 @@ export function TransactionForm({
   type,
   reasons,
 }: OrderFormTypes) {
-  const t = useTranslations()
+  const t = (key: string) => key
   const params = useSearchParams()
 
   const [receipt, setReceipt] = useState<Receipt>({
@@ -346,7 +345,7 @@ export function TransactionForm({
 }
 
 const SubmitBtns = ({ onDiscard }: { onDiscard: () => void }) => {
-  const t = useTranslations()
+  const t = (key: string) => key
   return (
     <div className="flex items-center gap-2">
       <Button variant="outline" size="sm" type="button" onClick={onDiscard}>

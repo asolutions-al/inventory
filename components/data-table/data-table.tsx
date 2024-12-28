@@ -22,7 +22,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { Filter } from "./filter"
 import { DataTablePagination } from "./pagination"
@@ -43,7 +42,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const t = useTranslations()
+  const t = (key: string) => key
 
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])

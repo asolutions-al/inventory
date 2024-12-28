@@ -4,7 +4,6 @@ import { buttonVariants } from "@/components/ui/button"
 import { Messages } from "@/global"
 import { useGetShopId } from "@/hooks"
 import { cn } from "@/lib/utils"
-import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -16,7 +15,7 @@ interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
-  const t = useTranslations()
+  const t = (key: string) => key
   const pathname = usePathname()
   const shopId = useGetShopId()
 

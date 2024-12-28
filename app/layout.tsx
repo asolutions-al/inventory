@@ -3,8 +3,6 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { appUrl } from "@/contants/consts"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { GeistSans } from "geist/font/sans"
-import { NextIntlClientProvider } from "next-intl"
-import { getMessages } from "next-intl/server"
 import "./globals.css"
 
 export const metadata = {
@@ -18,25 +16,21 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const messages = await getMessages()
-
   return (
     <html lang="en" className={GeistSans.className} suppressHydrationWarning>
-      <NextIntlClientProvider messages={messages}>
-        <TooltipProvider>
-          <body>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {children}
-              <Toaster className="print:hidden" />
-            </ThemeProvider>
-          </body>
-        </TooltipProvider>
-      </NextIntlClientProvider>
+      <TooltipProvider>
+        <body>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster className="print:hidden" />
+          </ThemeProvider>
+        </body>
+      </TooltipProvider>
     </html>
   )
 }

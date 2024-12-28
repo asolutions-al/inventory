@@ -19,14 +19,13 @@ import {
   InsertUserFormType,
   SelectUserType,
 } from "@/db/(inv)/schema"
-import { useTranslations } from "next-intl"
 
 export function AccountForm({
   defaultValues,
 }: {
   defaultValues?: SelectUserType
 }) {
-  const t = useTranslations()
+  const t = (key: string) => key
   const form = useForm<InsertUserFormType>({
     resolver: zodResolver(insertUserFormSchema),
     defaultValues,

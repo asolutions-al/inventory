@@ -10,7 +10,6 @@ import {
 import { SelectMemberTypeWithShopUser } from "@/db/(inv)/schema"
 import { ColumnDef } from "@tanstack/react-table"
 import { Trash } from "lucide-react"
-import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { DateCell } from "../cells/date"
@@ -25,7 +24,7 @@ const columns: ColumnDef<SelectMemberTypeWithShopUser>[] = [
     accessorKey: "role",
     header: ({ column }) => <SortBtn text="Role" column={column} />,
     cell: ({ row }) => {
-      const t = useTranslations()
+      const t = (key: string) => key
       return t(row.original.role)
     },
   },
@@ -46,7 +45,7 @@ const columns: ColumnDef<SelectMemberTypeWithShopUser>[] = [
 export const memberColumns = columns
 
 const Actions = ({ data }: { data: any }) => {
-  const t = useTranslations()
+  const t = (key: string) => key
   const pathname = usePathname()
 
   return (

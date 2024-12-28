@@ -13,7 +13,6 @@ import { InsertFormShopType, insertFormShopSchema } from "@/db/(inv)/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
-import { useTranslations } from "next-intl"
 import { PostgresError } from "postgres"
 import { toast } from "sonner"
 
@@ -23,7 +22,7 @@ type Types = {
 }
 
 export function ShopForm({ performAction, onSuccess }: Types) {
-  const t = useTranslations()
+  const t = (key: string) => key
   const form = useForm<InsertFormShopType>({
     resolver: zodResolver(insertFormShopSchema),
     defaultValues: {

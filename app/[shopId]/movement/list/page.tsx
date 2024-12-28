@@ -18,19 +18,19 @@ import { and, desc, eq, gte, lte } from "drizzle-orm"
 import { getTranslations } from "next-intl/server"
 import Link from "next/link"
 
-export default async function MovementPage({
-  searchParams,
-}: {
-  searchParams: {
+type Params = {
+  searchParams: Promise<{
     row?: string
     action?: "movements" | "delete" | "receipt"
     tab?: string
-  }
-}) {
+  }>
+}
+
+export default async function MovementPage({ searchParams }: Params) {
   const t = await getTranslations()
   const { role } = (await getMember()) || {}
 
-  const { tab } = searchParams
+  const { tab } = await searchParams
   const { start, end, validTab } = useDateTabs({ tabParam: tab })
   console.log({ start, end, validTab })
   const { shopId, userId } = await getFromHeaders()

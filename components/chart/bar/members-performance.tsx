@@ -9,13 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart"
-import { useTranslations } from "next-intl"
+import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 
 type Props = {
   data: {
@@ -27,7 +21,7 @@ type Props = {
 }
 
 function Chart({ data }: Props) {
-  const t = useTranslations()
+  const t = (key: string) => key
 
   const config: ChartConfig = {
     in: {
@@ -44,7 +38,7 @@ function Chart({ data }: Props) {
     },
   }
 
-  const neededUsers = 2 - data.length // 2 is the minimum number of users needed
+  const neededUsers = 2 - data?.length // 2 is the minimum number of users needed
   const users = Array.from({ length: neededUsers }, (_, i) => ({
     user: "",
     in: 0,
@@ -74,11 +68,11 @@ function Chart({ data }: Props) {
               stackId="a"
               fill="var(--color-commission)"
             />
-            <ChartTooltip
+            {/* <ChartTooltip
               content={<ChartTooltipContent hideLabel />}
               cursor={false}
               defaultIndex={1}
-            />
+            /> */}
           </BarChart>
         </ChartContainer>
       </CardContent>

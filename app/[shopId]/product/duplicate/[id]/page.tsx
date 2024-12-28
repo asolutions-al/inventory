@@ -13,15 +13,15 @@ import { eq } from "drizzle-orm"
 import { getTranslations } from "next-intl/server"
 
 type Args = {
-  params: {
+  params: Promise<{
     shopId: string
     id: string
-  }
+  }>
 }
 
 async function DuplicateProductPage({ params }: Args) {
   const t = await getTranslations()
-  const { id } = params
+  const { id } = await params
   const data = await db.query.product.findFirst({
     where: eq(product.id, id),
     // with: { productImages: true },

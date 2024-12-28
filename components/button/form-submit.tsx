@@ -1,5 +1,4 @@
 import { CheckIcon, Eraser } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { FieldValues, UseFormReturn } from "react-hook-form"
 import { Button } from "../ui/button"
 
@@ -8,7 +7,7 @@ const FormSubmitBtns = <T extends FieldValues>({
 }: {
   form: UseFormReturn<T>
 }) => {
-  const t = useTranslations()
+  const t = (key: string) => key
   return (
     <div className="flex items-center justify-end gap-2">
       <Button

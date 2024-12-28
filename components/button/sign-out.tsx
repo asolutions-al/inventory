@@ -2,7 +2,6 @@
 
 import { ButtonProps } from "@/components/ui/button"
 import { LogOut } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { DropdownMenuItem } from "../ui/dropdown-menu"
 
 export const SignOutBtn = ({
@@ -14,7 +13,7 @@ export const SignOutBtn = ({
   performAction: () => void
   rest?: ButtonProps
 }) => {
-  const t = useTranslations()
+  const t = (key: string) => key
 
   return (
     <DropdownMenuItem onClick={() => performAction()} {...rest}>

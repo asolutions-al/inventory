@@ -32,7 +32,6 @@ import {
 } from "@/components/ui/select"
 import { Messages } from "@/global"
 import { party_type, status } from "@/orm/(inv)/schema"
-import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 
 type Props = {
@@ -42,7 +41,7 @@ type Props = {
 }
 
 function PartyForm({ defaultValues, onSubmit, title }: Props) {
-  const t = useTranslations()
+  const t = (key: string) => key
   const form = useForm<PartyFormSchema>({
     resolver: zodResolver(partyFormSchema),
     defaultValues: {

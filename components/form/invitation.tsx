@@ -7,7 +7,6 @@ import {
 import { role } from "@/orm/(inv)/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { PlusCircleIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { PostgresError } from "postgres"
 import { useForm } from "react-hook-form"
@@ -36,7 +35,7 @@ export function InvitationForm({
     id: string
   }>
 }) {
-  const t = useTranslations()
+  const t = (key: string) => key
 
   const router = useRouter()
   const searchParams = useSearchParams()

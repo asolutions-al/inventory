@@ -1,14 +1,14 @@
 import { createServerClient } from "@supabase/ssr"
 import { cookies } from "next/headers"
 
-const clientCreator = ({
+const clientCreator = async ({
   supabaseUrl,
   supabaseKey,
 }: {
   supabaseUrl: string
   supabaseKey: string
 }) => {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
 
   return createServerClient(supabaseUrl, supabaseKey, {
     cookies: {
@@ -39,9 +39,8 @@ const clientCreator = ({
 //     supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
 //   });
 // };
-export const createAuthClient = () => {
-  return clientCreator({
+export const createAuthClient = async () =>
+  clientCreator({
     supabaseUrl: process.env.NEXT_PUBLIC_AUTH_SUPABASE_URL!,
     supabaseKey: process.env.NEXT_PUBLIC_AUTH_SUPABASE_ANON_KEY!,
   })
-}

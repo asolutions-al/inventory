@@ -17,7 +17,6 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 import { SelectCategoriesType } from "@/db/(inv)/schema"
-import { useTranslations } from "next-intl"
 
 export type RevenueByCategoryChartDataType = {
   category: string
@@ -32,7 +31,7 @@ export function RevenueByCategoryChart({
   data: RevenueByCategoryChartDataType[]
   categoriesList: SelectCategoriesType[]
 }) {
-  const t = useTranslations()
+  const t = (key: string) => key
 
   const chartConfig = categoriesList.reduce((acc, curr, index) => {
     acc[curr.name] = {

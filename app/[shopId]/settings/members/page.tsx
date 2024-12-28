@@ -24,15 +24,15 @@ import { SParamAction } from "@/types"
 import { PlusCircleIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 type Args = {
-  searchParams: {
+  searchParams: Promise<{
     row?: string
     invitation?: string
     action: SParamAction
-  }
+  }>
 }
 async function MembersPage({ searchParams }: Args) {
   const t = await getTranslations()
-  const { invitation: invitationParam, action, row } = searchParams
+  const { invitation: invitationParam, action, row } = await searchParams
   const { shopId } = await getFromHeaders()
   const data = await db.query.member.findMany({
     where: eq(member.shopId, shopId),

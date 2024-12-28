@@ -10,7 +10,6 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 import { Paintbrush } from "lucide-react"
-import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { useMemo } from "react"
 
@@ -23,7 +22,7 @@ export function GradientPicker({
   setBackground: (background: string) => void
   className?: string
 }) {
-  const t = useTranslations()
+  const t = (key: string) => key
   const solids = [
     "#E2E2E2",
     "#ff75c3",

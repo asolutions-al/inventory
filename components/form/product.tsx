@@ -43,7 +43,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { useGetShopId } from "@/hooks"
 import { status } from "@/orm/(inv)/schema"
 import { flyImgInputUpload } from "@/utils/html"
-import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -72,7 +71,7 @@ export function ProductForm({
   createNewCategory,
   deleteCategory,
 }: Types) {
-  const t = useTranslations()
+  const t = (key: string) => key
   const shopId = useGetShopId()
   const router = useRouter()
   const form = useForm<InsertProductFormType>({
@@ -568,7 +567,7 @@ export function ProductForm({
 }
 
 const SubmitBtns = ({ onDiscard }: { onDiscard: () => void }) => {
-  const t = useTranslations()
+  const t = (key: string) => key
   return (
     <div className="flex items-center gap-2">
       <Button variant="outline" size="sm" type="button" onClick={onDiscard}>

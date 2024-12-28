@@ -1,7 +1,6 @@
 "use client"
 
 import { createShop } from "@/db/(inv)/actions/shop"
-import { useTranslations } from "next-intl"
 import { PropsWithChildren, useState } from "react"
 import { ShopForm } from "../form/shop"
 import {
@@ -13,7 +12,7 @@ import {
 } from "../ui/dialog"
 
 const NewShopDialog = ({ children }: PropsWithChildren) => {
-  const t = useTranslations()
+  const t = (key: string) => key
   const [open, setOpen] = useState(false)
   return (
     <Dialog open={open} onOpenChange={setOpen}>

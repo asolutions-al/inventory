@@ -24,9 +24,9 @@ import Link from "next/link"
 export default async function PartyListPage({
   searchParams,
 }: {
-  searchParams: { status?: Status }
+  searchParams: Promise<{ status?: Status }>
 }) {
-  const { status: statusParam = "ACTIVE" } = searchParams
+  const { status: statusParam = "ACTIVE" } = await searchParams
   const t = await getTranslations()
   const { shopId } = await getFromHeaders()
 

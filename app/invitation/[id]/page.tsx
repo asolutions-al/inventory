@@ -8,13 +8,13 @@ import { redirect } from "next/navigation"
 export default async function InvitationIdPage({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
-  const client = createAuthClient()
+  const client = await createAuthClient()
   const {
     data: { user },
   } = await client.auth.getUser()
-  const { id } = params
+  const { id } = await params
   const data = await db.query.invitation.findFirst({
     where: eq(invitation.id, id),
     with: {

@@ -10,10 +10,10 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { locales } from "@/i18n"
-import { useLocale, useTranslations } from "next-intl"
+import { useLocale } from "next-intl"
 
 export function LanguageSwitcher() {
-  const t = useTranslations()
+  const t = (key: string) => key
   const locale = useLocale()
 
   return (
