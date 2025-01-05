@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/sidebar"
 import { SelectShopType } from "@/db/(inv)/schema"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
 import { useParams } from "next/navigation"
 import { NewShopDialog } from "./dialog/new-shop"
 import { DialogTrigger } from "./ui/dialog"
@@ -63,13 +64,21 @@ export function ShopSwitcher({ teams }: { teams: SelectShopType[] }) {
                 {t("Shops")}
               </DropdownMenuLabel>
               {teams.map((team, index) => (
-                <DropdownMenuItem key={team.name} className="gap-2 p-2">
-                  <div className="flex size-6 items-center justify-center rounded-sm border">
-                    <AudioWaveformIcon className="size-4 shrink-0" />
-                  </div>
-                  {team.name}
-                  <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
-                </DropdownMenuItem>
+                <Link href={`/${team.id}`}>
+                  <DropdownMenuItem
+                    key={team.name}
+                    className="gap-2 p-2"
+                    onClick={() => {
+                      console.log("Switching to shop", team.name)
+                    }}
+                  >
+                    <div className="flex size-6 items-center justify-center rounded-sm border">
+                      <AudioWaveformIcon className="size-4 shrink-0" />
+                    </div>
+                    {team.name}
+                    <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                </Link>
               ))}
               <DropdownMenuSeparator />
 

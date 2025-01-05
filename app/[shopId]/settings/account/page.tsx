@@ -4,7 +4,7 @@ import { user } from "@/orm/(inv)/schema"
 import { getFromHeaders } from "@/utils"
 import { eq } from "drizzle-orm"
 import { getTranslations } from "next-intl/server"
-import { AccountForm } from "./account-form"
+import { AccountForm } from "../account-form"
 
 export default async function SettingsAccountPage() {
   const t = await getTranslations()

@@ -135,7 +135,7 @@ export function AppSidebar({
         items: [
           {
             title: t("Account"),
-            url: `/${shopId}/settings`,
+            url: `/${shopId}/settings/account`,
           },
           {
             title: t("Shop"),

@@ -88,7 +88,7 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <Link href={`/${shopId}/settings`}>
+              <Link href={`/${shopId}/settings/account`}>
                 <DropdownMenuItem>
                   <BadgeCheck />
                   Account

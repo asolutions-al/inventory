@@ -39,7 +39,7 @@ export default async function AuthButton({
         <DropdownMenuLabel>{user?.email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <RoleWrapper requiredRole="ADMIN">
-          <Link href={`/${shopId}/settings`}>
+          <Link href={`/${shopId}/settings/account`}>
             <DropdownMenuItem>
               <SettingsIcon size={15} className="mr-1" />
               {t("Settings")}
