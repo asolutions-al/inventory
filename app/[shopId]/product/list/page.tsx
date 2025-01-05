@@ -5,6 +5,7 @@ import { PlusCircle } from "lucide-react"
 import { DataTable, productColumns } from "@/components/data-table"
 import { ConfirmDialog } from "@/components/dialog"
 import { ProductMovementsSheet } from "@/components/sheet/product-movements"
+import { StatusTab } from "@/components/tab"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -13,10 +14,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { RoleWrapper } from "@/components/wrappers"
 import { TAB_START_END } from "@/contants/maps"
-import { useStatusTabs } from "@/hooks"
 import { getMember } from "@/lib/supabase"
 import { movement, product, status } from "@/orm/(inv)/schema"
 import { getFromHeaders } from "@/utils/general"
@@ -31,16 +30,15 @@ export default async function ProductsPage({
   searchParams: Promise<{
     row?: string
     action?: "movements" | "delete"
-    tab?: string
+    tab?: (typeof status.enumValues)[number]
   }>
 }) {
   const t = await getTranslations()
   const { getStart, getEnd } = TAB_START_END["LAST30DAYS"]
-  const { row, action, tab } = await searchParams
-  const { validTab } = useStatusTabs({ tabParam: tab })
+  const { row, action, tab = "ACTIVE" } = await searchParams
   const { shopId } = await getFromHeaders()
   const data = await db.query.product.findMany({
-    where: and(eq(product.shopId, shopId), eq(product.status, validTab)),
+    where: and(eq(product.shopId, shopId), eq(product.status, tab)),
     orderBy: product.name,
     with: {
       // category: true,
@@ -90,33 +88,23 @@ export default async function ProductsPage({
 
   return (
     <>
-      <Tabs defaultValue={status.enumValues[1]}>
-        <div className="flex items-center">
-          <TabsList>
-            {status.enumValues.map((status) => (
-              <Link
-                key={status}
-                href={`/${shopId}/product/list?tab=${status}`}
-                passHref
-              >
-                <TabsTrigger value={status}>{t(status)}</TabsTrigger>
-              </Link>
-            ))}
-          </TabsList>
-          <div className="ml-auto flex items-center gap-2">
-            <RoleWrapper requiredRole="ADMIN">
-              <Link href={`/${shopId}/product/create`}>
-                <Button size="sm" className="h-8 gap-1">
-                  <PlusCircle className="h-3.5 w-3.5" />
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    {t("Add Product")}
-                  </span>
-                </Button>
-              </Link>
-            </RoleWrapper>
-          </div>
+      <div className="flex items-center">
+        <StatusTab defaultValue="ACTIVE" />
+
+        <div className="ml-auto flex items-center gap-2">
+          <RoleWrapper requiredRole="ADMIN">
+            <Link href={`/${shopId}/product/create`}>
+              <Button size="sm" className="h-8 gap-1">
+                <PlusCircle className="h-3.5 w-3.5" />
+                <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                  {t("Add Product")}
+                </span>
+              </Button>
+            </Link>
+          </RoleWrapper>
         </div>
-      </Tabs>
+      </div>
+
       <Card x-chunk="dashboard-06-chunk-0">
         <CardHeader>
           <CardTitle>{t("Products")}</CardTitle>

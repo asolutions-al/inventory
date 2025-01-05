@@ -34,7 +34,7 @@ export function AppSidebar({
     user: {
       name: props.user?.email!,
       email: props.user?.email!,
-      avatar: "/avatars/shadcn.jpg",
+      avatar: "",
     },
     teams: shopsList,
     navMain: [

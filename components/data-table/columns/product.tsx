@@ -49,25 +49,25 @@ const columns: ColumnDef<SelectProduct>[] = [
       )
     },
   },
-  {
-    accessorKey: "category.name",
-    header: ({ column }) => <SortBtn text="Category" column={column} />,
-    cell: ({ row }) => {
-      const data = row.original
-      const { color, name } = data.category || {}
-      return (
-        <div className="flex items-center gap-4">
-          {color && (
-            <div
-              style={{ background: color }}
-              className="rounded-md h-6 w-6 active:scale-105"
-            />
-          )}
-          {name}
-        </div>
-      )
-    },
-  },
+  // {
+  //   accessorKey: "category.name",
+  //   header: ({ column }) => <SortBtn text="Category" column={column} />,
+  //   cell: ({ row }) => {
+  //     const data = row.original
+  //     const { color, name } = data.category || {}
+  //     return (
+  //       <div className="flex items-center gap-4">
+  //         {color && (
+  //           <div
+  //             style={{ background: color }}
+  //             className="rounded-md h-6 w-6 active:scale-105"
+  //           />
+  //         )}
+  //         {name}
+  //       </div>
+  //     )
+  //   },
+  // },
   {
     accessorKey: "currentStock",
     header: ({ column }) => <SortBtn text="Current Stock" column={column} />,
