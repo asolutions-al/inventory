@@ -14,7 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { RoleWrapper } from "@/components/wrappers"
-import { TAB_START_END } from "@/contants/maps"
+import { RANGE_TO_DATE_MAP } from "@/contants/maps"
 import { getMember } from "@/lib/supabase"
 import { movement, product, status } from "@/orm/(inv)/schema"
 import { getFromHeaders } from "@/utils/general"
@@ -29,15 +29,15 @@ export default async function ProductsPage({
   searchParams: Promise<{
     row?: string
     action?: "movements" | "delete"
-    tab?: (typeof status.enumValues)[number]
+    status?: (typeof status.enumValues)[number]
   }>
 }) {
   const t = await getTranslations()
-  const { getStart, getEnd } = TAB_START_END["LAST30DAYS"]
-  const { row, action, tab = "ACTIVE" } = await searchParams
+  const { getStart, getEnd } = RANGE_TO_DATE_MAP["LAST30DAYS"]
+  const { row, action, status: statusParam = "ACTIVE" } = await searchParams
   const { shopId } = await getFromHeaders()
   const data = await db.query.product.findMany({
-    where: and(eq(product.shopId, shopId), eq(product.status, tab)),
+    where: and(eq(product.shopId, shopId), eq(product.status, statusParam)),
     orderBy: product.name,
   })
 
@@ -78,9 +78,8 @@ export default async function ProductsPage({
 
   return (
     <>
-      <div className="flex items-center">
+      <div className="flex items-center mb-2">
         <StatusTab defaultValue="ACTIVE" />
-
         <div className="ml-auto flex items-center gap-2">
           <RoleWrapper requiredRole="ADMIN">
             <Link href={`/${shopId}/product/create`}>

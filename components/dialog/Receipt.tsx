@@ -55,7 +55,10 @@ export function ReceiptDialog({
             const product = products.find((p) => p.id === m.productId)
             const { name, price = 0 } = product || {}
             return (
-              <div className="grid grid-cols-6 border-b border-dotted py-2">
+              <div
+                className="grid grid-cols-6 border-b border-dotted py-2"
+                key={m.productId}
+              >
                 <div className="col-span-3">{name}</div>
                 <div>{m.amount}</div>
                 <div>{price}</div>

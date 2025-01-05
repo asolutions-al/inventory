@@ -1,4 +1,4 @@
-type DateTab =
+type RangeT =
   | "TODAY"
   | "YESTERDAY"
   | "WEEK"

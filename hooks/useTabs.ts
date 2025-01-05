@@ -1,13 +1,13 @@
 import { DATE_TABS } from "@/contants/list"
-import { TAB_START_END } from "@/contants/maps"
+import { RANGE_TO_DATE_MAP } from "@/contants/maps"
 import { status } from "@/orm/(inv)/schema"
 
 export const useDateTabs = ({ tabParam }: { tabParam?: string }) => {
-  const validTab: DateTab =
-    tabParam && DATE_TABS.includes(tabParam as DateTab)
-      ? (tabParam as DateTab)
+  const validTab: RangeT =
+    tabParam && DATE_TABS.includes(tabParam as RangeT)
+      ? (tabParam as RangeT)
       : "TODAY"
-  const { getStart, getEnd } = TAB_START_END[validTab]
+  const { getStart, getEnd } = RANGE_TO_DATE_MAP[validTab]
   const start = getStart()
   const end = getEnd()
 

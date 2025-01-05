@@ -12,8 +12,8 @@ import {
   subDays,
 } from "date-fns"
 
-export const TAB_START_END: Record<
-  DateTab,
+export const RANGE_TO_DATE_MAP: Record<
+  RangeT,
   {
     getStart: () => Date
     getEnd: () => Date

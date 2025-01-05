@@ -1,17 +1,13 @@
 "use client"
 
-import { status } from "@/orm/(inv)/schema"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs"
 
-const LIST = status.enumValues
-const StatusTab = ({
-  defaultValue,
-}: {
-  defaultValue: (typeof LIST)[number]
-}) => {
+const LIST: RangeT[] = ["TODAY", "YESTERDAY", "WEEK", "MONTH", "QUARTER"]
+
+const RangeTab = ({ defaultValue }: { defaultValue: RangeT }) => {
   const t = useTranslations()
   const pathname = usePathname()
   return (
@@ -22,7 +18,7 @@ const StatusTab = ({
             key={item}
             href={{
               pathname,
-              query: { status: item },
+              query: { range: item },
             }}
             passHref
           >
@@ -34,4 +30,4 @@ const StatusTab = ({
   )
 }
 
-export { StatusTab }
+export { RangeTab }

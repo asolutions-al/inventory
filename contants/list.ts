@@ -89,7 +89,7 @@ export const SETTING_ITEMS: {
   // },
 ]
 
-export const DATE_TABS: DateTab[] = [
+export const DATE_TABS: RangeT[] = [
   "TODAY",
   "YESTERDAY",
   "WEEK",
