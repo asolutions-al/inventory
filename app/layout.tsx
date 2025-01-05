@@ -4,7 +4,7 @@ import { appUrl } from "@/contants/consts"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { TranslationProvider } from "@/providers/translation"
 import { GeistSans } from "geist/font/sans"
-import { PropsWithChildren } from "react"
+import { PropsWithChildren, Suspense } from "react"
 import "./globals.css"
 
 export const metadata = {
@@ -25,7 +25,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
               enableSystem
               disableTransitionOnChange
             >
-              {children}
+              <Suspense>{children}</Suspense>
               <Toaster className="print:hidden" />
             </ThemeProvider>
           </body>
