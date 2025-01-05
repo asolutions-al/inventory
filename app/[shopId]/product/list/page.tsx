@@ -40,10 +40,6 @@ export default async function ProductsPage({
   const data = await db.query.product.findMany({
     where: and(eq(product.shopId, shopId), eq(product.status, tab)),
     orderBy: product.name,
-    with: {
-      // category: true,
-      // productImages: true,
-    },
   })
 
   const movements = await db.query.movement.findMany({
@@ -113,7 +109,6 @@ export default async function ProductsPage({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {/* @ts-ignore */}
           <DataTable columns={productColumns} data={finalData} />
         </CardContent>
       </Card>

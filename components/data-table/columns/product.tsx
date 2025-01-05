@@ -10,7 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { ProductSchemaT, SelectProductImagesType } from "@/db/(inv)/schema"
+import { ProductSchemaT } from "@/db/(inv)/schema"
 import { useGetShopId } from "@/hooks"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, CopyPlusIcon, EditIcon } from "lucide-react"
@@ -20,7 +20,7 @@ import { usePathname } from "next/navigation"
 
 type SelectProduct = ProductSchemaT & {
   stockLeft: number | typeof Infinity | typeof NaN // could be infinity or NaN, in case the product has never been sold, due to division by 0
-  productImages: SelectProductImagesType[]
+  // productImages: SelectProductImagesType[]
 }
 
 const columns: ColumnDef<SelectProduct>[] = [
