@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { SelectProductType } from "@/db/(inv)/schema"
+import { ProductSchemaT } from "@/db/(inv)/schema"
 import dayjs from "dayjs"
 import { PrinterIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -20,7 +20,7 @@ export type Receipt = {
     productId: string
     amount: number
   }[]
-  products: SelectProductType[]
+  products: ProductSchemaT[]
   date: Date
 }
 

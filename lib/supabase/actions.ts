@@ -2,8 +2,8 @@ import { TransactionSchemaType } from "@/components/form"
 import { db } from "@/db/(inv)/instance"
 import {
   InsertCategoryFormType,
-  InsertProductFormType,
-  SelectProductType,
+  ProductFormSchemaT,
+  ProductSchemaT,
   SelectTransactionType,
 } from "@/db/(inv)/schema"
 import { category, movement, product, transaction } from "@/orm/(inv)/schema"
@@ -11,7 +11,7 @@ import { getFromHeaders } from "@/utils"
 import { eq, sql } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 
-export const createProduct = async (values: InsertProductFormType) => {
+export const createProduct = async (values: ProductFormSchemaT) => {
   "use server"
   const { userId, shopId } = await getFromHeaders()
 
@@ -54,7 +54,7 @@ export const createTransaction = async (
     products: productsList,
   }: {
     type: SelectTransactionType["type"]
-    products: SelectProductType[]
+    products: ProductSchemaT[]
   }
 ) => {
   "use server"

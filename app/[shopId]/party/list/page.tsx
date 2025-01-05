@@ -14,7 +14,6 @@ import {
 import { RoleWrapper } from "@/components/wrappers"
 import { getMember } from "@/lib/supabase"
 import { movement, product, status } from "@/orm/(inv)/schema"
-import { Status } from "@/types"
 import { getFromHeaders } from "@/utils/general"
 import { and, desc, eq } from "drizzle-orm"
 import { PlusCircle } from "lucide-react"
@@ -24,7 +23,7 @@ import Link from "next/link"
 export default async function PartyListPage({
   searchParams,
 }: {
-  searchParams: Promise<{ status?: Status }>
+  searchParams: Promise<{ status?: (typeof status.enumValues)[number] }>
 }) {
   const { status: statusParam = "ACTIVE" } = await searchParams
   const t = await getTranslations()

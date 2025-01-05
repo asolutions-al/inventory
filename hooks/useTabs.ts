@@ -1,7 +1,6 @@
 import { DATE_TABS } from "@/contants/list"
 import { TAB_START_END } from "@/contants/maps"
 import { status } from "@/orm/(inv)/schema"
-import { DateTab, Status } from "@/types"
 
 export const useDateTabs = ({ tabParam }: { tabParam?: string }) => {
   const validTab: DateTab =
@@ -16,9 +15,10 @@ export const useDateTabs = ({ tabParam }: { tabParam?: string }) => {
 }
 
 export const useStatusTabs = ({ tabParam }: { tabParam?: string }) => {
-  const validTab: Status =
-    tabParam && status.enumValues.includes(tabParam as Status)
-      ? (tabParam as Status)
+  const validTab: (typeof status.enumValues)[number] =
+    tabParam &&
+    status.enumValues.includes(tabParam as (typeof status.enumValues)[number])
+      ? (tabParam as (typeof status.enumValues)[number])
       : "ACTIVE"
 
   return { validTab }

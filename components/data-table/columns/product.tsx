@@ -10,11 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import {
-  SelectProductImagesType,
-  SelectProductType,
-  SelectProductTypeWithCategory,
-} from "@/db/(inv)/schema"
+import { ProductSchemaT } from "@/db/(inv)/schema"
 import { useGetShopId } from "@/hooks"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, CopyPlusIcon, EditIcon } from "lucide-react"
@@ -22,9 +18,9 @@ import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-type SelectProduct = SelectProductTypeWithCategory & {
+type SelectProduct = ProductSchemaT & {
   stockLeft: number | typeof Infinity | typeof NaN // could be infinity or NaN, in case the product has never been sold, due to division by 0
-  productImages: SelectProductImagesType[]
+  // productImages: SelectProductImagesType[]
 }
 
 const columns: ColumnDef<SelectProduct>[] = [
@@ -49,25 +45,25 @@ const columns: ColumnDef<SelectProduct>[] = [
       )
     },
   },
-  {
-    accessorKey: "category.name",
-    header: ({ column }) => <SortBtn text="Category" column={column} />,
-    cell: ({ row }) => {
-      const data = row.original
-      const { color, name } = data.category || {}
-      return (
-        <div className="flex items-center gap-4">
-          {color && (
-            <div
-              style={{ background: color }}
-              className="rounded-md h-6 w-6 active:scale-105"
-            />
-          )}
-          {name}
-        </div>
-      )
-    },
-  },
+  // {
+  //   accessorKey: "category.name",
+  //   header: ({ column }) => <SortBtn text="Category" column={column} />,
+  //   cell: ({ row }) => {
+  //     const data = row.original
+  //     const { color, name } = data.category || {}
+  //     return (
+  //       <div className="flex items-center gap-4">
+  //         {color && (
+  //           <div
+  //             style={{ background: color }}
+  //             className="rounded-md h-6 w-6 active:scale-105"
+  //           />
+  //         )}
+  //         {name}
+  //       </div>
+  //     )
+  //   },
+  // },
   {
     accessorKey: "currentStock",
     header: ({ column }) => <SortBtn text="Current Stock" column={column} />,
@@ -174,7 +170,7 @@ const columns: ColumnDef<SelectProduct>[] = [
 
 export const productColumns = columns
 
-const Actions = ({ data }: { data: SelectProductType }) => {
+const Actions = ({ data }: { data: ProductSchemaT }) => {
   const t = useTranslations()
   const pathname = usePathname()
   const shopId = useGetShopId()

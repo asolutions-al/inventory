@@ -11,7 +11,7 @@ import {
 import {
   insertMovementFormSchema,
   insertTransactionFormSchema,
-  SelectProductType,
+  ProductSchemaT,
   SelectTransactionType,
 } from "@/db/(inv)/schema"
 import { cn } from "@/lib/utils"
@@ -47,7 +47,7 @@ import {
 } from "../ui/select"
 
 export type OrderFormTypes = {
-  products: SelectProductType[]
+  products: ProductSchemaT[]
   performAction: (values: TransactionSchemaType) => Promise<void>
   type: SelectTransactionType["type"]
   reasons: SelectTransactionType["reason"][]
