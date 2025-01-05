@@ -11,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Role } from "@/db/(inv)/schema"
-import { useAppStore } from "@/providers/store-provider"
 import {
   ClipboardIcon,
   EditIcon,
@@ -37,7 +36,6 @@ export function RowActionDropdown({
   id: string
   hiddenBtns?: RowAction[]
 }) {
-  const store = useAppStore((store) => store)
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const updatedSearchParams = new URLSearchParams(searchParams)
@@ -105,7 +103,7 @@ export function RowActionDropdown({
         {actions.map((action) => {
           const isHidden =
             hiddenBtns?.includes(action.id) ||
-            !roleBasedActions[store.role].includes(action.id)
+            !roleBasedActions["MEMBER"].includes(action.id)
           if (isHidden) return null
           return (
             <div key={action.name}>

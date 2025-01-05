@@ -15,11 +15,11 @@ import { and, eq, gte, lte } from "drizzle-orm"
 import { getTranslations } from "next-intl/server"
 import Link from "next/link"
 
-type Args = {
+type Props = {
   searchParams: Promise<{ tab?: string }>
 }
 
-export default async function ShopDashboardPage({ searchParams }: Args) {
+export default async function ShopDashboardPage({ searchParams }: Props) {
   const { tab } = await searchParams
   const t = await getTranslations()
   const { validTab, start, end } = useDateTabs({ tabParam: tab })

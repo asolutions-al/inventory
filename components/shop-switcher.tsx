@@ -64,9 +64,8 @@ export function ShopSwitcher({ teams }: { teams: SelectShopType[] }) {
                 {t("Shops")}
               </DropdownMenuLabel>
               {teams.map((team, index) => (
-                <Link href={`/${team.id}`}>
+                <Link href={`/${team.id}`} key={team.name}>
                   <DropdownMenuItem
-                    key={team.name}
                     className="gap-2 p-2"
                     onClick={() => {
                       console.log("Switching to shop", team.name)

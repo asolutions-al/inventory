@@ -8,13 +8,13 @@ import { getFromHeaders } from "@/utils/general"
 import { eq } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 
-type Args = {
+type Props = {
   params: Promise<{
     shopId: string
     id: string
   }>
 }
-async function UpdateProductPage({ params }: Args) {
+async function UpdateProductPage({ params }: Props) {
   const { id } = await params
   const data = await db.query.product.findFirst({
     where: eq(product.id, id),
@@ -51,7 +51,7 @@ async function UpdateProductPage({ params }: Args) {
   )
 }
 
-export default (args: Args) =>
+export default (args: Props) =>
   RoleWrapper({
     children: <UpdateProductPage {...args} />,
     requiredRole: "ADMIN",

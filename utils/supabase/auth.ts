@@ -1,10 +1,10 @@
 import { accountsUrl, appUrl } from "@/contants/consts"
 
-type Args = {
+type Params = {
   searchParams?: URLSearchParams
 }
 
-export const getAuthUrl = (args?: Args) => {
+export const getAuthUrl = (args?: Params) => {
   const { searchParams } = args || {}
 
   const url = new URL(accountsUrl)

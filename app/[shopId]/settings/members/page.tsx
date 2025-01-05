@@ -22,14 +22,14 @@ import { RoleWrapper } from "@/components/wrappers"
 import { appUrl } from "@/contants/consts"
 import { PlusCircleIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
-type Args = {
+type Props = {
   searchParams: Promise<{
     row?: string
     invitation?: string
     action: SParamAction
   }>
 }
-async function MembersPage({ searchParams }: Args) {
+async function MembersPage({ searchParams }: Props) {
   const t = await getTranslations()
   const { invitation: invitationParam, action, row } = await searchParams
   const { shopId } = await getFromHeaders()
@@ -136,7 +136,7 @@ async function MembersPage({ searchParams }: Args) {
   )
 }
 
-export default (args: Args) =>
+export default (args: Props) =>
   RoleWrapper({
     children: <MembersPage {...args} />,
     requiredRole: "ADMIN",

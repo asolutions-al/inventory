@@ -7,14 +7,14 @@ import { product } from "@/orm/(inv)/schema"
 import { ProductFormProvider } from "@/providers/product-form"
 import { eq } from "drizzle-orm"
 
-type Args = {
+type Props = {
   params: Promise<{
     shopId: string
     id: string
   }>
 }
 
-async function DuplicateProductPage({ params }: Args) {
+async function DuplicateProductPage({ params }: Props) {
   const { id } = await params
   const data = await db.query.product.findFirst({
     where: eq(product.id, id),
@@ -37,7 +37,7 @@ async function DuplicateProductPage({ params }: Args) {
   )
 }
 
-export default (args: Args) =>
+export default (args: Props) =>
   RoleWrapper({
     children: <DuplicateProductPage {...args} />,
     requiredRole: "ADMIN",
