@@ -2,6 +2,7 @@
 
 import { member, shop } from "@/orm/(inv)/schema"
 import { getFromHeaders } from "@/utils"
+import { revalidateTag } from "next/cache"
 import { db } from "../instance"
 import { InsertFormShopType } from "../schema"
 
@@ -27,6 +28,7 @@ const createShop = async (values: InsertFormShopType) => {
         userId,
       })
     })
+    revalidateTag("members")
   } catch (error) {
     console.error(error)
     throw error

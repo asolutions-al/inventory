@@ -39,9 +39,7 @@ const Actions = (props: CellContext<PartySelectSchema, unknown>) => {
               icon: <Trash size={15} className="mr-2" />,
               className: "text-red-600",
               shortcut: "⌘⌫",
-              onClick: () => {
-                console.log("Delete")
-              },
+              onClick: () => {},
               Wrapper: DialogTrigger,
             },
           ]}

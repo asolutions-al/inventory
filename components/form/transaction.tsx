@@ -103,7 +103,6 @@ export function TransactionForm({
     },
   })
 
-  console.log("form", form.formState.errors)
   const fieldArray = useFieldArray({
     control: form.control,
     name: "movements",

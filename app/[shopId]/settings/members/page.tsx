@@ -41,7 +41,6 @@ async function MembersPage({ searchParams }: Args) {
       shop: true,
     },
   })
-  console.log("data", data)
 
   const shareUrl = `${appUrl}/invitation/${invitationParam}`
 
@@ -101,7 +100,6 @@ async function MembersPage({ searchParams }: Args) {
                     .returning({
                       id: invitation.id,
                     })
-                  console.log("res", res)
                   return {
                     id: res.id,
                   }

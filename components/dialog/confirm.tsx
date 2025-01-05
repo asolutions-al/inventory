@@ -67,7 +67,6 @@ export function ConfirmDialog({
               onClick={async () => {
                 try {
                   await performAction()
-                  console.log("action success")
                   toast.success(`${table} ${action.toLowerCase()} success`)
                 } catch (error) {
                   toast.error(

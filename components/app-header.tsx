@@ -33,7 +33,6 @@ export function AppHeader() {
             const isLast = index === paths.length - 1
             const isActive = isLast
             const href = `/${shopId}/${paths.slice(0, index + 1).join("/")}`
-            console.log("href", href)
             return (
               <React.Fragment key={path}>
                 <BreadcrumbItem>
