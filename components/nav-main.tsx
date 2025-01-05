@@ -60,7 +60,6 @@ export function NavMain({
                 <SidebarMenuSub>
                   {item.items?.map((subItem) => {
                     const isActive = pathname === subItem.url
-                    console.log("isActive", isActive)
                     return (
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton asChild isActive={isActive}>
