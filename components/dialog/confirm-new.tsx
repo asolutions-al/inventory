@@ -52,7 +52,6 @@ export function ConfirmDialogNew({
               onClick={async () => {
                 try {
                   await onConfirm()
-                  console.log("action success")
                   toast.success(t("Action completed successfully"))
                 } catch (error) {
                   toast.error(

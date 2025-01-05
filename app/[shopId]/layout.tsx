@@ -1,12 +1,10 @@
 import { AppHeader } from "@/components/app-header"
 import { AppSidebar } from "@/components/app-sidebar"
 import { SidebarProvider } from "@/components/ui/sidebar"
-import { db } from "@/db/(inv)/instance"
-import { member } from "@/orm/(inv)/schema"
+import { getMembers } from "@/db/(inv)/loaders/member"
 import { StoreProvider } from "@/providers/store-provider"
 import { getFromHeaders } from "@/utils/general"
 import { createAuthClient } from "@/utils/supabase/server"
-import { eq } from "drizzle-orm"
 import { redirect } from "next/navigation"
 
 type Args = {
@@ -21,13 +19,7 @@ export default async function RootLayout({ children, params }: Args) {
     data: { user },
   } = await authClient.auth.getUser()
   const { userId } = await getFromHeaders()
-  const members = await db.query.member.findMany({
-    where: eq(member.userId, userId),
-    with: {
-      shop: true,
-    },
-  })
-
+  const members = await getMembers({ userId })
   const shopsList = members.map((member) => member.shop)
   const shopIsValid = shopsList.some((shop) => shop.id === shopId)
 

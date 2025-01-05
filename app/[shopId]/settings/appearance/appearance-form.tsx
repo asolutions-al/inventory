@@ -50,11 +50,7 @@ export function AppearanceForm() {
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-[200px] p-0">
-            <Command
-              onValueChange={(value) => {
-                console.log(value)
-              }}
-            >
+            <Command onValueChange={(value) => {}}>
               <CommandInput placeholder="Search language..." />
               <CommandList>
                 <CommandEmpty>{t("No language found")}.</CommandEmpty>

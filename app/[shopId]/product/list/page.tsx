@@ -47,7 +47,6 @@ export default async function ProductsPage({
       // productImages: true,
     },
   })
-  console.log("data", data)
 
   const movements = await db.query.movement.findMany({
     where: and(

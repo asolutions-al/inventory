@@ -41,7 +41,6 @@ app.use(async (ctx) => {
       cacheControl: "3600",
       upsert: false,
     })
-  console.log("upload", upload)
   if (uploadError) {
     console.error("uploadError", uploadError)
     ctx.response.status = 500

@@ -93,8 +93,6 @@ export function ProductForm({
     },
   })
 
-  console.log("form", form.formState.errors)
-
   const [imageFiles, setImageFiles] = useState<File[]>([])
   const [showCategoryDialog, setShowCategoryDialog] = useState(false)
 
@@ -119,7 +117,6 @@ export function ProductForm({
 
   async function onSubmitCategory(values: InsertCategoryFormType) {
     try {
-      console.log("values", values)
       await createNewCategory(values)
       toast.success(t("Category saved successfully"))
       setShowCategoryDialog(false)

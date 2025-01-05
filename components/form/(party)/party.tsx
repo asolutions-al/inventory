@@ -66,7 +66,7 @@ function PartyForm({ defaultValues, onSubmit, title }: Props) {
                 console.error("error", error)
               }
             },
-            (e) => console.log("e", e)
+            (e) => {}
           )}
           className="max-w-[58rem] mx-auto"
         >

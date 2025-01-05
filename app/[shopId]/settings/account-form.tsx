@@ -32,9 +32,7 @@ export function AccountForm({
     defaultValues,
   })
 
-  function onSubmit(data: InsertUserFormType) {
-    console.log("data", data)
-  }
+  function onSubmit(data: InsertUserFormType) {}
 
   return (
     <Form {...form}>
