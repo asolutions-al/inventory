@@ -1,5 +1,5 @@
 import { ProductForm } from "@/components/form"
-import { FormHeader } from "@/components/layout/form-header"
+import { PageHeader } from "@/components/layout/page-header"
 import { RoleWrapper } from "@/components/wrappers"
 import { createProduct } from "@/lib/supabase"
 import { ProductFormProvider } from "@/providers/product-form"
@@ -7,9 +7,7 @@ import { ProductFormProvider } from "@/providers/product-form"
 async function CreateProductPage() {
   return (
     <ProductFormProvider>
-      <div className="mb-4">
-        <FormHeader title={"Create Product"} formId="product" />
-      </div>
+      <PageHeader title={"Create Product"} formId="product" className="mb-2" />
       <ProductForm
         performAction={async (values) => {
           "use server"

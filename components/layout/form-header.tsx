@@ -1,6 +1,7 @@
 "use client"
 
 import { Messages } from "@/global"
+import { cn } from "@/lib/utils"
 import { CheckIcon, Eraser } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { FieldValues, useFormContext, UseFormReturn } from "react-hook-form"
@@ -37,14 +38,16 @@ const ActionBtns = <T extends FieldValues>({
 const FormHeader = ({
   title,
   formId,
+  className = "",
 }: {
   title: keyof Messages
   formId: FormId
+  className?: string
 }) => {
   const t = useTranslations()
   const form = useFormContext()
   return (
-    <div className="flex items-center gap-4">
+    <div className={cn("flex items-center gap-4", className)}>
       <BackButton />
       <h1 className="font-semibold text-xl">{t(title)}</h1>
       <div className="ml-auto hidden sm:block">

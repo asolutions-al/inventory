@@ -74,158 +74,142 @@ export function ProductForm({ performAction }: Props) {
                   {t("Information about the product")}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="grid gap-6">
-                  <div className="grid gap-2">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t("Name")}</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Pizza" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <FormField
-                      control={form.control}
-                      name="barcode"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t("Barcode")}</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="1234567890"
-                              {...field}
-                              value={field.value || ""}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <FormField
-                      control={form.control}
-                      name="currentStock"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t("Current Stock")}</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="number"
-                              placeholder="0.00"
-                              {...field}
-                              onChange={(e) =>
-                                field.onChange(parseInt(e.target.value) || 0)
-                              }
-                              onFocus={(e) => e.target.select()}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="grid gap-2">
-                      <FormField
-                        control={form.control}
-                        name="cost"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t("Cost")}</FormLabel>
-                            <FormControl>
-                              <Input
-                                type="number"
-                                placeholder="0.00"
-                                {...field}
-                                onChange={(e) =>
-                                  field.onChange(parseFloat(e.target.value))
-                                }
-                                onFocus={(e) => e.target.select()}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className="grid gap-2">
-                      <FormField
-                        control={form.control}
-                        name="price"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>{t("Price")}</FormLabel>
-                            <FormControl>
-                              <Input
-                                type="number"
-                                placeholder="0.00"
-                                {...field}
-                                onChange={(e) =>
-                                  field.onChange(parseFloat(e.target.value))
-                                }
-                                onFocus={(e) => e.target.select()}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid gap-2">
-                    <FormField
-                      control={form.control}
-                      name="commission"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t("Commission")}</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="number"
-                              placeholder="0.00"
-                              {...field}
-                              onChange={(e) =>
-                                field.onChange(parseInt(e.target.value) || 0)
-                              }
-                              onFocus={(e) => e.target.select()}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="grid gap-3">
-                    <FormField
-                      control={form.control}
-                      name="description"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t("Description")}</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder={t(
-                                "A fancy pizza with pepperoni, mushrooms, and olives"
-                              )}
-                              {...field}
-                              value={field.value || ""}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+              <CardContent className="space-y-2">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("Name")}</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Pizza" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="barcode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("Barcode")}</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="1234567890"
+                          {...field}
+                          value={field.value || ""}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="currentStock"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("Current Stock")}</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="0.00"
+                          {...field}
+                          onChange={(e) =>
+                            field.onChange(parseInt(e.target.value) || 0)
+                          }
+                          onFocus={(e) => e.target.select()}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="cost"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t("Cost")}</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            placeholder="0.00"
+                            {...field}
+                            onChange={(e) =>
+                              field.onChange(parseFloat(e.target.value))
+                            }
+                            onFocus={(e) => e.target.select()}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="price"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t("Price")}</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            placeholder="0.00"
+                            {...field}
+                            onChange={(e) =>
+                              field.onChange(parseFloat(e.target.value))
+                            }
+                            onFocus={(e) => e.target.select()}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
+                <FormField
+                  control={form.control}
+                  name="commission"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("Commission")}</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="0.00"
+                          {...field}
+                          onChange={(e) =>
+                            field.onChange(parseInt(e.target.value) || 0)
+                          }
+                          onFocus={(e) => e.target.select()}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("Description")}</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder={t(
+                            "A fancy pizza with pepperoni, mushrooms, and olives"
+                          )}
+                          {...field}
+                          value={field.value || ""}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </CardContent>
             </Card>
           </div>
@@ -235,37 +219,33 @@ export function ProductForm({ performAction }: Props) {
                 <CardTitle>{t("Product Status")}</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid gap-6">
-                  <div className="grid gap-3">
-                    <FormField
-                      control={form.control}
-                      name="status"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>{t("Status")}</FormLabel>
-                          <Select
-                            value={field.value || ""}
-                            onValueChange={field.onChange}
-                          >
-                            <FormControl>
-                              <SelectTrigger aria-label={t("Select status")}>
-                                <SelectValue placeholder={t("Select status")} />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {status.enumValues.map((item) => (
-                                <SelectItem key={item} value={item}>
-                                  {t(item)}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
+                <FormField
+                  control={form.control}
+                  name="status"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("Status")}</FormLabel>
+                      <Select
+                        value={field.value || ""}
+                        onValueChange={field.onChange}
+                      >
+                        <FormControl>
+                          <SelectTrigger aria-label={t("Select status")}>
+                            <SelectValue placeholder={t("Select status")} />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {status.enumValues.map((item) => (
+                            <SelectItem key={item} value={item}>
+                              {t(item)}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </CardContent>
             </Card>
           </div>

@@ -37,7 +37,7 @@ export default async function RootLayout({ children, params }: Args) {
         <AppSidebar members={members} user={user} />
         <main className="relative flex min-h-svh flex-1 flex-col overflow-x-auto">
           <AppHeader />
-          <div className="mt-3 mx-1.5 md:mx-3">{children}</div>
+          <div className="flex-1 m-1.5 md:m-2 lg:m-2.5">{children}</div>
         </main>
       </SidebarProvider>
     </StoreProvider>
