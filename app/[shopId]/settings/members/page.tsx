@@ -20,7 +20,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { RoleWrapper } from "@/components/wrappers"
 import { appUrl } from "@/contants/consts"
-import { SParamAction } from "@/types"
 import { PlusCircleIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 type Args = {
