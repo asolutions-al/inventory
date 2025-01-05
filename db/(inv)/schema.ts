@@ -13,43 +13,23 @@ import {
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 import { z } from "zod"
 
+/////////////PRODUCT/////////////////////
 export const productSchema = createSelectSchema(product)
 export type ProductSchemaT = z.infer<typeof productSchema>
 
-export const productFormSchema = createInsertSchema(product, {
-  name: (sch) => sch.name.min(1),
-}).omit({
-  id: true,
-  shopId: true,
-  createdAt: true,
-  updatedBy: true,
-})
-export type ProductFormSchemaT = z.infer<typeof productFormSchema>
+/////////////TRANSACTION/////////////////////
+export const transactionSchema = createSelectSchema(transaction)
+export type TransactionSchemaT = z.infer<typeof transactionSchema>
 
-export const insertMovementFormSchema = createInsertSchema(movement, {
-  amount: (sch) => sch.amount.positive(),
-})
-export type InsertMovementFormType = z.infer<typeof insertMovementFormSchema>
-export const selectMovementSchema = createSelectSchema(movement)
-export type SelectMovementType = z.infer<typeof selectMovementSchema>
-export type SelectMovementTypeWithUser = SelectMovementType & {
+/////////////MOVEMENT/////////////////////
+export const movementSchema = createSelectSchema(movement)
+export type MovementSchemaT = z.infer<typeof movementSchema>
+export type MovementWUserSchemaT = MovementSchemaT & {
   user: SelectUserType
 }
-
-export const insertTransactionSchema = createInsertSchema(transaction)
-export const insertTransactionFormSchema = createInsertSchema(transaction, {
-  date: z.date(),
-}).omit({
-  shopId: true,
-  type: true,
-  amount: true,
-  updatedBy: true,
-})
-export const selectTransactionSchema = createSelectSchema(transaction)
-export type SelectTransactionType = z.infer<typeof selectTransactionSchema>
-
+// TODO: migrate below insert sceham into form provider
+/////////////SHOP/////////////////////
 export const insertShopSchema = createInsertSchema(shop)
-
 export const selectShopSchema = createSelectSchema(shop)
 export type SelectShopType = z.infer<typeof selectShopSchema>
 export const insertFormShopSchema = createInsertSchema(shop, {

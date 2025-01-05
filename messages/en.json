@@ -233,5 +233,9 @@
   "We're sorry, the page you requested could not be found": "We're sorry, the page you requested could not be found",
   "Please check the URL or try navigating back to the homepage": "Please check the URL or try navigating back to the homepage",
   "Page not found": "Page not found",
-  "Return to Homepage": "Return to Homepage"
+  "Return to Homepage": "Return to Homepage",
+  "Create In": "Create In",
+  "Transaction saved successfully": "Transaction saved successfully",
+  "An error occurred": "An error occurred",
+  "Create Out": "Create Out"
 }

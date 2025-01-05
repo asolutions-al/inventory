@@ -14,7 +14,6 @@ import { Messages } from "@/global"
 import { useClearSearchParams } from "@/hooks"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
-import { PostgresError } from "postgres"
 import { toast } from "sonner"
 
 export function ConfirmDialog({
@@ -69,10 +68,7 @@ export function ConfirmDialog({
                   await performAction()
                   toast.success(`${table} ${action.toLowerCase()} success`)
                 } catch (error) {
-                  toast.error(
-                    (error as PostgresError)?.message ||
-                      "An error occurred. Please try again later."
-                  )
+                  toast.error(t("An error occurred"))
                 }
               }}
             >

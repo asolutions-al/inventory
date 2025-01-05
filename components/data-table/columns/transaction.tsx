@@ -11,9 +11,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import {
+  MovementWUserSchemaT,
   ProductSchemaT,
-  SelectMovementTypeWithUser,
-  SelectTransactionType,
+  TransactionSchemaT,
 } from "@/db/(inv)/schema"
 import { useClearSearchParams } from "@/hooks"
 import { ColumnDef } from "@tanstack/react-table"
@@ -23,7 +23,7 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { DateCell } from "../cells"
 
-const columns: ColumnDef<SelectTransactionType>[] = [
+const columns: ColumnDef<TransactionSchemaT>[] = [
   {
     accessorKey: "date",
     header: ({ column }) => <SortBtn text="Date" column={column} />,
@@ -55,7 +55,7 @@ const columns: ColumnDef<SelectTransactionType>[] = [
 
 export const transactionColumns = columns
 
-const Actions = ({ data }: { data: SelectTransactionType }) => {
+const Actions = ({ data }: { data: TransactionSchemaT }) => {
   const t = useTranslations()
   const pathname = usePathname()
 
@@ -114,7 +114,7 @@ export function ActionDetails({
   data,
 }: {
   action?: "movements" | "receipt"
-  data: SelectMovementTypeWithUser[]
+  data: MovementWUserSchemaT[]
 }) {
   const router = useRouter()
   const { path } = useClearSearchParams({ keys: ["row", "action"] })

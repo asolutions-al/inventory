@@ -11,4 +11,4 @@ type TransactionTab = "IN" | "OUT"
 type SParamAction = "delete" | "movements"
 type SParamRow = string
 
-type FormId = "product" | "party"
+type FormId = "product" | "transaction"

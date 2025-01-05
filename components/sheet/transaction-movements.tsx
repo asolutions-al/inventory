@@ -7,7 +7,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
-import { SelectMovementTypeWithUser } from "@/db/(inv)/schema"
+import { MovementWUserSchemaT } from "@/db/(inv)/schema"
 import { useTranslations } from "next-intl"
 import { DataTable, movementUserColumns } from "../data-table"
 
@@ -16,7 +16,7 @@ export async function TransactionMovementsSheet({
   open,
   onOpenChange,
 }: {
-  data: SelectMovementTypeWithUser[]
+  data: MovementWUserSchemaT[]
   open: boolean
   onOpenChange: (open: boolean) => void
 }) {

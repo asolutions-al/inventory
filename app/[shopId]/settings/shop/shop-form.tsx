@@ -20,7 +20,6 @@ import {
   SelectShopType,
 } from "@/db/(inv)/schema"
 import { useTranslations } from "next-intl"
-import { PostgresError } from "postgres"
 import { toast } from "sonner"
 
 export function ShopForm({
@@ -45,10 +44,7 @@ export function ShopForm({
       toast.success(t("Shop saved successfully"))
     } catch (error) {
       console.error("error", error)
-      toast(
-        (error as PostgresError)?.message ||
-          "An error occurred. Please try again later."
-      )
+      toast(t("An error occurred"))
     }
   }
 

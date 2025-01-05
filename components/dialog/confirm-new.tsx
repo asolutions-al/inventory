@@ -13,7 +13,6 @@ import {
 import { Messages } from "@/global"
 import { Check, X } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { PostgresError } from "postgres"
 import { ReactNode } from "react"
 import { toast } from "sonner"
 
@@ -54,10 +53,7 @@ export function ConfirmDialogNew({
                   await onConfirm()
                   toast.success(t("Action completed successfully"))
                 } catch (error) {
-                  toast.error(
-                    (error as PostgresError)?.message ||
-                      "An error occurred. Please try again later."
-                  )
+                  toast.error(t("An error occurred"))
                 }
               }}
             >

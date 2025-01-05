@@ -9,7 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { PlusCircleIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { PostgresError } from "postgres"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { Button } from "../ui/button"
@@ -58,10 +57,7 @@ export function InvitationForm({
       toast.success(t("Invitation created successfully"))
     } catch (error) {
       console.error("error", error)
-      toast(
-        (error as PostgresError)?.message ||
-          "An error occurred. Please try again later."
-      )
+      toast(t("An error occurred"))
     }
   }
   return (

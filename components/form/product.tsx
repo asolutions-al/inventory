@@ -15,7 +15,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { ProductFormSchemaT } from "@/db/(inv)/schema"
 
 import { useFormContext } from "react-hook-form"
 
@@ -28,6 +27,7 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { status } from "@/orm/(inv)/schema"
+import { ProductFormSchemaT } from "@/providers/product-form"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
@@ -50,7 +50,7 @@ export function ProductForm({ performAction }: Props) {
       router.back()
     } catch (error) {
       console.error("error", error)
-      toast.error(t("An error occurred. Please try again later."))
+      toast.error(t("An error occurred"))
     }
   }
 
@@ -62,7 +62,7 @@ export function ProductForm({ performAction }: Props) {
     <>
       <form
         onSubmit={form.handleSubmit(onValid, onInvalid)}
-        className="mx-auto max-w-[59rem]"
+        className="mx-auto max-w-[60rem]"
         id={formId}
       >
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -14,7 +14,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
 import { useTranslations } from "next-intl"
-import { PostgresError } from "postgres"
 import { toast } from "sonner"
 
 type Types = {
@@ -40,10 +39,7 @@ export function ShopForm({ performAction, onSuccess }: Types) {
       onSuccess?.()
     } catch (error) {
       console.error("error", error)
-      toast.error(
-        (error as PostgresError)?.message ||
-          "An error occurred. Please try again later."
-      )
+      toast.error(t("An error occurred"))
     }
   }
 

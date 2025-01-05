@@ -7,7 +7,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
-import { SelectMovementTypeWithUser } from "@/db/(inv)/schema"
+import { MovementWUserSchemaT } from "@/db/(inv)/schema"
 import { useClearSearchParams } from "@/hooks"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
@@ -17,7 +17,7 @@ import { movementUserColumns } from "../data-table/columns/movement"
 export async function ProductMovementsSheet({
   data,
 }: {
-  data: SelectMovementTypeWithUser[]
+  data: MovementWUserSchemaT[]
 }) {
   const t = useTranslations()
   const router = useRouter()

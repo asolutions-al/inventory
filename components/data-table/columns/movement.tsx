@@ -1,11 +1,11 @@
 "use client"
 
 import { SortBtn } from "@/components/button"
-import { SelectMovementTypeWithUser } from "@/db/(inv)/schema"
+import { MovementWUserSchemaT } from "@/db/(inv)/schema"
 import { ColumnDef } from "@tanstack/react-table"
 import { DateCell } from "../cells"
 
-const movementUserColumns: ColumnDef<SelectMovementTypeWithUser>[] = [
+const movementUserColumns: ColumnDef<MovementWUserSchemaT>[] = [
   {
     accessorKey: "productDetails.name",
     header: ({ column }) => <SortBtn text="Product name" column={column} />,
@@ -32,7 +32,7 @@ const movementUserColumns: ColumnDef<SelectMovementTypeWithUser>[] = [
   },
 ]
 
-const movementProductUserColumns: ColumnDef<SelectMovementTypeWithUser>[] = [
+const movementProductUserColumns: ColumnDef<MovementWUserSchemaT>[] = [
   {
     accessorKey: "product.name",
     header: ({ column }) => <SortBtn text="Product name" column={column} />,

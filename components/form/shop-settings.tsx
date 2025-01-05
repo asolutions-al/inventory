@@ -7,7 +7,6 @@ import {
 } from "@/db/(inv)/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
-import { PostgresError } from "postgres"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form"
@@ -35,10 +34,7 @@ export function ShopSettingsForm({
       toast.success(t("Shop saved successfully"))
     } catch (error) {
       console.error("error", error)
-      toast(
-        (error as PostgresError)?.message ||
-          "An error occurred. Please try again later."
-      )
+      toast(t("An error occurred"))
     }
   }
   return (

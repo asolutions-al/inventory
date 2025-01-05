@@ -1,12 +1,12 @@
-import { TransactionSchemaType } from "@/components/form"
 import { db } from "@/db/(inv)/instance"
 import {
   InsertCategoryFormType,
-  ProductFormSchemaT,
   ProductSchemaT,
-  SelectTransactionType,
+  TransactionSchemaT,
 } from "@/db/(inv)/schema"
 import { category, movement, product, transaction } from "@/orm/(inv)/schema"
+import { ProductFormSchemaT } from "@/providers/product-form"
+import { TransactionFormSchemaT } from "@/providers/transaction-form"
 import { getFromHeaders } from "@/utils"
 import { eq, sql } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
@@ -48,12 +48,12 @@ export const deleteCategory = async (id: string) => {
 }
 
 export const createTransaction = async (
-  values: TransactionSchemaType,
+  values: TransactionFormSchemaT,
   {
     type,
     products: productsList,
   }: {
-    type: SelectTransactionType["type"]
+    type: TransactionSchemaT["type"]
     products: ProductSchemaT[]
   }
 ) => {

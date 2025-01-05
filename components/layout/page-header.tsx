@@ -15,7 +15,9 @@ const PageHeader = async ({
 }) => {
   const t = await getTranslations()
   return (
-    <div className={cn("flex items-center gap-4", className)}>
+    <div
+      className={cn("flex items-center gap-4 mx-auto max-w-[60rem]", className)}
+    >
       <BackButton />
       <h1 className="font-semibold text-xl">{t(title)}</h1>
 
