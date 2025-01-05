@@ -10,7 +10,6 @@ async function CreateProductPage() {
     <ProductFormProvider>
       <PageHeader
         title={"Create Product"}
-        formId="product"
         className="mb-2"
         renderRight={() => <FormActionBtns formId="product" />}
       />

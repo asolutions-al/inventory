@@ -1,10 +1,8 @@
-"use client"
-
 import Image from "next/image"
-import { Separator } from "./ui/separator"
-import { SidebarTrigger } from "./ui/sidebar"
+import { Separator } from "../ui/separator"
+import { SidebarTrigger } from "../ui/sidebar"
 
-export function AppHeader() {
+const AppHeader = async () => {
   return (
     <header className="flex sticky top-0 bg-background h-16 shrink-0 items-center gap-2 border-b px-4">
       <SidebarTrigger className="-ml-1" />
@@ -14,3 +12,5 @@ export function AppHeader() {
     </header>
   )
 }
+
+export { AppHeader }

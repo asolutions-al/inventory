@@ -1,5 +1,6 @@
+import { FormActionBtns } from "@/components/button"
 import { ProductForm } from "@/components/form"
-import { FormHeader } from "@/components/layout/form-header"
+import { PageHeader } from "@/components/layout/page-header"
 import { RoleWrapper } from "@/components/wrappers"
 import { db } from "@/db/(inv)/instance"
 import { product } from "@/orm/(inv)/schema"
@@ -23,9 +24,11 @@ async function UpdateProductPage({ params }: Props) {
   return (
     <>
       <ProductFormProvider defaultValues={data}>
-        <div className="mb-4">
-          <FormHeader title={"Update Product"} formId="product" />
-        </div>
+        <PageHeader
+          title={"Update Product"}
+          className="mb-2"
+          renderRight={() => <FormActionBtns formId="product" />}
+        />
         <ProductForm
           performAction={async (values) => {
             "use server"

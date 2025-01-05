@@ -21,8 +21,7 @@ import { partyFormSchema, PartyFormSchema } from "@/db/(inv)/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
-import { FormSubmitBtns } from "@/components/button"
-import { FormHeader } from "@/components/form-header"
+import { BackButton, FormSubmitBtns } from "@/components/button"
 import {
   Select,
   SelectContent,
@@ -70,7 +69,15 @@ function PartyForm({ defaultValues, onSubmit, title }: Props) {
           )}
           className="max-w-[58rem] mx-auto"
         >
-          <FormHeader title={title} form={form} />
+          <div className="flex items-center gap-4">
+            <BackButton />
+            <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
+              {t(title)}
+            </h1>
+            <div className="ml-auto hidden sm:block">
+              <FormSubmitBtns form={form} />
+            </div>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 mt-5">
             <Card x-chunk="dashboard-07-chunk-0" className="lg:col-span-2">
               <CardHeader>

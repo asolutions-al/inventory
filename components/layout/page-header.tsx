@@ -10,7 +10,6 @@ const PageHeader = async ({
   renderRight,
 }: {
   title: keyof Messages
-  formId: FormId
   className?: string
   renderRight?: () => ReactNode
 }) => {
