@@ -19,6 +19,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 export function NavMain({
   items,
@@ -34,6 +35,7 @@ export function NavMain({
     }[]
   }[]
 }) {
+  const pathname = usePathname()
   const { setOpenMobile } = useSidebar()
   return (
     <SidebarGroup>
@@ -56,19 +58,23 @@ export function NavMain({
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
-                    <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
-                        <Link
-                          // @ts-ignore
-                          href={subItem.url}
-                          onClick={() => setOpenMobile(false)}
-                        >
-                          <span>{subItem.title}</span>
-                        </Link>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  ))}
+                  {item.items?.map((subItem) => {
+                    const isActive = pathname === subItem.url
+                    console.log("isActive", isActive)
+                    return (
+                      <SidebarMenuSubItem key={subItem.title}>
+                        <SidebarMenuSubButton asChild isActive={isActive}>
+                          <Link
+                            // @ts-ignore
+                            href={subItem.url}
+                            onClick={() => setOpenMobile(false)}
+                          >
+                            <span>{subItem.title}</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    )
+                  })}
                 </SidebarMenuSub>
               </CollapsibleContent>
             </SidebarMenuItem>

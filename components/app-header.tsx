@@ -1,7 +1,6 @@
 "use client"
 
 import { useGetShopId } from "@/hooks"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
 import React from "react"
 import {
@@ -39,10 +38,7 @@ export function AppHeader() {
                   {isActive ? (
                     <BreadcrumbPage>{path}</BreadcrumbPage>
                   ) : (
-                    <BreadcrumbLink asChild>
-                      {/* @ts-ignore */}
-                      <Link href={href}>{path}</Link>
-                    </BreadcrumbLink>
+                    <BreadcrumbLink>{path}</BreadcrumbLink>
                   )}
                 </BreadcrumbItem>
                 {!isLast && <BreadcrumbSeparator />}

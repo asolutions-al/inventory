@@ -3,7 +3,6 @@ import { db } from "@/db/(inv)/instance"
 import { PlusCircle } from "lucide-react"
 
 import { DataTable, productColumns } from "@/components/data-table"
-import { ConfirmDialog } from "@/components/dialog"
 import { ProductMovementsSheet } from "@/components/sheet/product-movements"
 import { StatusTab } from "@/components/tab"
 import { Button } from "@/components/ui/button"
@@ -77,11 +76,6 @@ export default async function ProductsPage({
     }
   })
 
-  const deleteAction = async () => {
-    "use server"
-    // TODO:
-  }
-
   return (
     <>
       <div className="flex items-center">
@@ -113,15 +107,6 @@ export default async function ProductsPage({
         </CardContent>
       </Card>
       {action === "movements" && <ProductMovements id={row} />}
-
-      {action === "delete" && (
-        <ConfirmDialog
-          performAction={deleteAction}
-          action="Delete"
-          table="Product"
-          extraDescription="All movements and transactions will be deleted"
-        />
-      )}
     </>
   )
 }

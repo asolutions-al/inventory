@@ -17,9 +17,7 @@ export const config = {
 }
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
-    request,
-  })
+  let response = NextResponse.next({ request })
   const crossDomainCookie = request.cookies.get("sb-auth")
   const { pathname, searchParams } = request.nextUrl
 

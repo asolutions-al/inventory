@@ -1,6 +1,6 @@
 "use client"
 
-import { CheckIcon, Eraser } from "lucide-react"
+import { CheckCircle2Icon, Eraser } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useFormContext } from "react-hook-form"
 import { Button } from "../ui/button"
@@ -20,7 +20,7 @@ const FormActionBtns = ({ formId }: { formId: FormId }) => {
         {t("Discard")}
       </Button>
       <Button size="sm" type="submit" form={formId}>
-        <CheckIcon size={15} className="mr-1" />
+        <CheckCircle2Icon size={15} className="mr-1" />
         {t("Save")}
       </Button>
     </div>
