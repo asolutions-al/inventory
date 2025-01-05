@@ -11,8 +11,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import {
+  ProductSchemaT,
   SelectMovementTypeWithUser,
-  SelectProductType,
   SelectTransactionType,
 } from "@/db/(inv)/schema"
 import { useClearSearchParams } from "@/hooks"
@@ -131,7 +131,7 @@ export function ActionDetails({
       movements={data}
       onOpenChange={onOpenChange}
       open={true}
-      products={data.map((m) => m.productDetails as SelectProductType)}
+      products={data.map((m) => m.productDetails as ProductSchemaT)}
     />
   ) : action === "movements" ? (
     <TransactionMovementsSheet

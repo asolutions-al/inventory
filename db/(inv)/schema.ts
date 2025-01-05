@@ -13,19 +13,18 @@ import {
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 import { z } from "zod"
 
-export const selectProductSchema = createSelectSchema(product)
-export type SelectProductType = z.infer<typeof selectProductSchema>
-export type SelectProductTypeWithCategory = SelectProductType & {
-  category: SelectCategoryType | null
-}
+export const productSchema = createSelectSchema(product)
+export type ProductSchemaT = z.infer<typeof productSchema>
 
-export const insertProductFormSchema = createInsertSchema(product, {
+export const productFormSchema = createInsertSchema(product, {
   name: (sch) => sch.name.min(1),
 }).omit({
+  id: true,
   shopId: true,
+  createdAt: true,
   updatedBy: true,
 })
-export type InsertProductFormType = z.infer<typeof insertProductFormSchema>
+export type ProductFormSchemaT = z.infer<typeof productFormSchema>
 
 export const insertMovementFormSchema = createInsertSchema(movement, {
   amount: (sch) => sch.amount.positive(),

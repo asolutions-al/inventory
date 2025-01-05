@@ -1,31 +1,22 @@
 import { ProductForm } from "@/components/form"
+import { FormHeader } from "@/components/layout/form-header"
 import { RoleWrapper } from "@/components/wrappers"
-import {
-  createCategory,
-  createProduct,
-  deleteCategory,
-  getCategories,
-} from "@/lib/supabase"
-import { uploadProductImages } from "@/lib/supabase/edge-actions"
-import { getTranslations } from "next-intl/server"
+import { createProduct } from "@/lib/supabase"
+import { ProductFormProvider } from "@/providers/product-form"
 
 async function CreateProductPage() {
-  const t = await getTranslations()
-  const categoriesList = await getCategories()
   return (
-    <>
+    <ProductFormProvider>
+      <div className="mb-4">
+        <FormHeader title={"Create Product"} formId="product" />
+      </div>
       <ProductForm
-        categoriesList={categoriesList}
-        title={t("Create Product")}
-        performAction={async (values, formData) => {
+        performAction={async (values) => {
           "use server"
-          const res = await createProduct(values)
-          if (formData) await uploadProductImages({ id: res.id, formData })
+          await createProduct(values)
         }}
-        createNewCategory={createCategory}
-        deleteCategory={deleteCategory}
       />
-    </>
+    </ProductFormProvider>
   )
 }
 

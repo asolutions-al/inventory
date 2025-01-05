@@ -4,7 +4,6 @@ import { appUrl } from "@/contants/consts"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { TranslationProvider } from "@/providers/translation"
 import { GeistSans } from "geist/font/sans"
-import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata = {
@@ -20,23 +19,21 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className} suppressHydrationWarning>
-      <Suspense>
-        <TranslationProvider>
-          <TooltipProvider>
-            <body>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-              >
-                {children}
-                <Toaster className="print:hidden" />
-              </ThemeProvider>
-            </body>
-          </TooltipProvider>
-        </TranslationProvider>
-      </Suspense>
+      <TranslationProvider>
+        <TooltipProvider>
+          <body>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+              <Toaster className="print:hidden" />
+            </ThemeProvider>
+          </body>
+        </TooltipProvider>
+      </TranslationProvider>
     </html>
   )
 }
