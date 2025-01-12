@@ -26,7 +26,7 @@ type Props = {
   searchParams: Promise<{
     row?: string
     invitation?: string
-    action: SParamAction
+    action: "delete" | "movements"
   }>
 }
 async function MembersPage({ searchParams }: Props) {

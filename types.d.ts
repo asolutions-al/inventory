@@ -6,9 +6,4 @@ type RangeT =
   | "QUARTER"
   | "LAST30DAYS"
 
-type TransactionTab = "IN" | "OUT"
-
-type SParamAction = "delete" | "movements"
-type SParamRow = string
-
 type FormId = "product" | "transaction"

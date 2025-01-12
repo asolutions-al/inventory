@@ -7,7 +7,6 @@ import { product } from "@/orm/(inv)/schema"
 import { ProductFormProvider } from "@/providers/product-form"
 import { getFromHeaders } from "@/utils/general"
 import { eq } from "drizzle-orm"
-import { revalidatePath } from "next/cache"
 
 type Props = {
   params: Promise<{
@@ -42,8 +41,6 @@ async function UpdateProductPage({ params }: Props) {
                   updatedBy: userId,
                 })
                 .where(eq(product.id, id))
-
-              revalidatePath("/[lang]/[shopId]/product")
             } catch (error) {
               console.error(error)
             }

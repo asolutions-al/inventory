@@ -1,15 +1,10 @@
 import { db } from "@/db/(inv)/instance"
-import {
-  InsertCategoryFormType,
-  ProductSchemaT,
-  TransactionSchemaT,
-} from "@/db/(inv)/schema"
-import { category, movement, product, transaction } from "@/orm/(inv)/schema"
+import { ProductSchemaT, TransactionSchemaT } from "@/db/(inv)/schema"
+import { movement, product, transaction } from "@/orm/(inv)/schema"
 import { ProductFormSchemaT } from "@/providers/product-form"
 import { TransactionFormSchemaT } from "@/providers/transaction-form"
 import { getFromHeaders } from "@/utils"
 import { eq, sql } from "drizzle-orm"
-import { revalidatePath } from "next/cache"
 
 export const createProduct = async (values: ProductFormSchemaT) => {
   "use server"
@@ -27,24 +22,7 @@ export const createProduct = async (values: ProductFormSchemaT) => {
       id: product.id,
     })
 
-  revalidatePath("/[lang]/[shopId]/product")
   return res
-}
-
-export const createCategory = async (values: InsertCategoryFormType) => {
-  "use server"
-  const { shopId } = await getFromHeaders()
-  await db.insert(category).values({
-    ...values,
-    shopId,
-  })
-  revalidatePath("/[lang]/[shopId]/product/create") //TODO: can optimize this
-}
-
-export const deleteCategory = async (id: string) => {
-  "use server"
-  await db.delete(category).where(eq(category.id, id))
-  revalidatePath("/[lang]/[shopId]/product/create")
 }
 
 export const createTransaction = async (
