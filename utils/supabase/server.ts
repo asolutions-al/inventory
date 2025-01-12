@@ -34,7 +34,7 @@ const clientCreator = async ({
 }
 
 /**
- * Not necessary atm. everything is server side
+ * Not necessary atm. only auth clined is needed on server
  */
 // export const createClient = () => {
 //   return clientCreator({
