@@ -1,6 +1,8 @@
 import { createServerClient } from "@supabase/ssr"
 import { cookies } from "next/headers"
 
+const isDev = process.env.NODE_ENV === "development"
+
 const clientCreator = async ({
   supabaseUrl,
   supabaseKey,
@@ -12,13 +14,14 @@ const clientCreator = async ({
 
   return createServerClient(supabaseUrl, supabaseKey, {
     cookies: {
-      getAll() {
-        return cookieStore.getAll()
-      },
-      setAll(cookiesToSet) {
+      getAll: () => cookieStore.getAll(),
+      setAll: (cookiesToSet) => {
         try {
           cookiesToSet.forEach(({ name, value, options }) => {
-            cookieStore.set(name, value, options)
+            cookieStore.set(name, value, {
+              domain: isDev ? "localhost" : ".asolutions.al", // https://github.com/supabase/supabase/issues/473#issuecomment-2543434925
+              ...options,
+            })
           })
         } catch (error) {
           // The `set` method was called from a Server Component.

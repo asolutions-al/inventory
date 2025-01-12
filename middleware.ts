@@ -1,7 +1,8 @@
 import { createServerClient } from "@supabase/ssr"
-import { Session } from "@supabase/supabase-js"
 import { NextRequest, NextResponse } from "next/server"
 import { getAuthUrl } from "./utils/supabase/auth"
+
+const isDev = process.env.NODE_ENV === "development"
 
 export const config = {
   matcher: [
@@ -18,7 +19,6 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request })
-  const crossDomainCookie = request.cookies.get("sb-auth")
   const { pathname, searchParams } = request.nextUrl
 
   const supabase = createServerClient(
@@ -26,31 +26,24 @@ export async function middleware(request: NextRequest) {
     process.env.NEXT_PUBLIC_AUTH_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        getAll() {
-          return request.cookies.getAll()
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
+        getAll: () => request.cookies.getAll(),
+        setAll: (cookiesToSet) => {
+          cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           )
           response = NextResponse.next({
             request,
           })
           cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options)
+            response.cookies.set(name, value, {
+              domain: isDev ? "localhost" : ".asolutions.al", // https://github.com/supabase/supabase/issues/473#issuecomment-2543434925
+              ...options,
+            })
           )
         },
       },
     }
   )
-
-  if (crossDomainCookie) {
-    /**
-     * TODO: check this, not sure if there is a better way to do this, but this is definitely not the best way
-     */
-    const session: Session = JSON.parse(crossDomainCookie!.value!)
-    await supabase.auth.setSession(session)
-  }
 
   // This will refresh session if expired - required for Server Components
   // https://supabase.com/docs/guides/auth/server-side/nextjs
